@@ -15,6 +15,10 @@ class MainActivity : AppCompatActivity() {
 
         //GRIB
 
+
         //Setter inn Metallert
+
+        //test
+
     }
 }
