@@ -13,6 +13,6 @@ class MainActivity : AppCompatActivity() {
 
         //val heihei = "heihei"
 
-        //Goodbye cruel world
+        //Goodbye cruel world fg
     }
 }
