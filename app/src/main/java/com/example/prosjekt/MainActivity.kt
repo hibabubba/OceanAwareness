@@ -14,6 +14,11 @@ class MainActivity : AppCompatActivity() {
         //val heihei = "heihei"
 
         //GRIB
+
+
+        //Setter inn Metallert
+
         //test
+
     }
 }
