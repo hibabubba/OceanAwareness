@@ -19,6 +19,7 @@ import com.example.prosjekt.R
 import com.mapbox.geojson.Point
 import com.mapbox.geojson.Polygon
 import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
@@ -39,9 +40,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
     private var sharedPreferences: SharedPreferences? = null
     private var longTextView: TextView? = null
     private var latTextView: TextView? = null
+    /*
     private var weather: Button? = null
     private var waves:  Button? = null
-    private var extreme:  Button? = null
+    private var extreme:  Button? = null */
     private var savedLat: Double = 0.toDouble()
     private var savedLong: Double = 0.toDouble()
 
@@ -54,11 +56,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         setContentView(R.layout.activity_main)
 
-        longTextView = findViewById(R.id.shared_pref_saved_long_textview)
+        /*longTextView = findViewById(R.id.shared_pref_saved_long_textview)
         latTextView = findViewById(R.id.shared_pref_saved_lat_textview)
         weather = findViewById(R.id.button)
         waves = findViewById(R.id.button2)
-        extreme = findViewById(R.id.button3)
+        extreme = findViewById(R.id.button3)*/
 
 
 
@@ -70,13 +72,16 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
     }
 
     override fun onMapReady(mapboxMap: MapboxMap) {
-        weather?.setVisibility(View.GONE)
-        waves?.setVisibility(View.GONE)
-        extreme?.setVisibility(View.GONE)
+
         this@MainActivity.mapboxMap = mapboxMap
-        mapboxMap.setLatLngBoundsForCameraTarget(MainActivity.RESTRICTED_BOUNDS_AREA)
-                 mapboxMap.setStyle(
+
+
+
+        mapboxMap.setStyle(
+
                      Style.Builder().fromUri(Style.MAPBOX_STREETS)
+
+
 
                          // Add the SymbolLayer icon image to the map style
                          .withImage(
@@ -84,7 +89,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
                                  this@MainActivity.resources, R.drawable.marker_black
                              )
                          )
-
                         // Adding a GeoJson source for the SymbolLayer icons.
                         .withSource(GeoJsonSource(CLICK_LOCATION_SOURCE_ID))
 
@@ -100,22 +104,23 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
                                     PropertyFactory.iconOffset(arrayOf(0f, -9f))
                                 )
                         )
+
                  )
 
 
-
-
-
-                 { style ->
-
+                 {
 
                      // Set the boundary area for the map camera(rectricted panning
-                        showBoundsArea(style)
+                      //  showBoundsArea(style)
+                     mapboxMap.setLatLngBoundsForCameraTarget(MainActivity.RESTRICTED_BOUNDS_AREA)
                      // Set the minimum zoom level of the map camera
                      mapboxMap.setMinZoomPreference(3.0)
 
-                     showCrosshair()
-                     mapboxMap.addOnMapClickListener(this@MainActivity)
+                   //  showCrosshair()
+
+                     mapboxMap.addOnMapClickListener(this@MainActivity )
+
+
 
                      // Get the coordinates from shared preferences
                      savedLong = getCoordinateFromSharedPref(SAVED_LONG_KEY)
@@ -140,6 +145,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
                      } else {
 
+
                          // Move the camera to the previously-saved coordinates
                          mapboxMap.animateCamera(
                              CameraUpdateFactory
@@ -159,9 +165,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
                          // Move the marker to the previously-saved coordinates
                         moveMarkerToLngLat(savedLong,savedLat)
 
-                        longTextView!!.text = String.format(" longitude: ", savedLong.toString())
+                   //     longTextView!!.text = String.format(" longitude: ", savedLong.toString())
 
-                        latTextView!!.text = String.format(" latitude: ", savedLat.toString())
+                    //    latTextView!!.text = String.format(" latitude: ", savedLat.toString())
                      }
 
     }
@@ -173,8 +179,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
             val clickLongitude = mapClickPoint.longitude
 
             //Hente ut cliken og sette det i texten
-            longTextView!!.text = clickLongitude.toString()
-            latTextView!!.text = clickLatitude.toString()
+//            longTextView!!.text = clickLongitude.toString()
+     //       latTextView!!.text = clickLatitude.toString()
+
 
             // Save the map click point coordinates to shared preferences
             if (sharedPreferences != null) {
@@ -183,6 +190,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
 
             }
+            /*
             //viser frem knappene når vi får koordinater, sjekk at de kommer bare når koordinatene gir mening
             weather?.setVisibility(View.VISIBLE)
             waves?.setVisibility(View.VISIBLE)
@@ -192,18 +200,18 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
             weather?.setOnClickListener{
                 val intent = Intent(this, Activity_Location::class.java)
                 //ta med meg koordinatene
-                intent.putExtra("lati", getCoordinateFromSharedPref(SAVED_LAT_KEY).toDouble())
-                intent.putExtra("longi", getCoordinateFromSharedPref(SAVED_LONG_KEY).toDouble())
+                intent.putExtra("lati", getCoordinateFromSharedPref(SAVED_LAT_KEY))
+                intent.putExtra("longi", getCoordinateFromSharedPref(SAVED_LONG_KEY))
                 startActivity(intent)
             }
             waves?.setOnClickListener{
                 val intent = Intent(this, Activity_Ocean::class.java)
                 //ta med meg koordinatene
-                intent.putExtra("lati", getCoordinateFromSharedPref(SAVED_LAT_KEY).toDouble())
-                intent.putExtra("longi", getCoordinateFromSharedPref(SAVED_LONG_KEY).toDouble())
+                intent.putExtra("lati", getCoordinateFromSharedPref(SAVED_LAT_KEY))
+                intent.putExtra("longi", getCoordinateFromSharedPref(SAVED_LONG_KEY))
                 startActivity(intent)
             }
-            extreme?.setOnClickListener{} //SETT INN FOR METAALERTS
+            extreme?.setOnClickListener{} //SETT INN FOR METAALERTS*/
 
             // Move the marker to the newly-saved coordinates
             moveMarkerToLngLat(clickLongitude, clickLatitude )
@@ -222,7 +230,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
             mapboxMap!!.getStyle { style ->
                 val clickLocationSource = style.getSourceAs<GeoJsonSource>(MainActivity.CLICK_LOCATION_SOURCE_ID)
                 clickLocationSource?.setGeoJson(Point.fromLngLat(newLong, newLat))
+                (MarkerOptions()
+                        .position(LatLng(getCoordinateFromSharedPref(SAVED_LAT_KEY), getCoordinateFromSharedPref(SAVED_LONG_KEY)))
+                        .title("Trykk her"))
             }
+
+
         }
 
         /**
@@ -330,8 +343,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
         private val CLICK_LOCATION_ICON_ID = "CLICK_LOCATION_ICON_ID"
         private val CLICK_LOCATION_LAYER_ID = "CLICK_LOCATION_LAYER_ID"
 
-        private val BOUND_CORNER_NW = LatLng(61.0274, 5.0328 )
-        private val BOUND_CORNER_SE = LatLng(70.66336, 15.74943)
+        //
+        private  val BOUND_CORNER_NW = LatLng(55.0274, 0.0328 )
+        private  val BOUND_CORNER_SE = LatLng(80.66336, 30.74943)
         private val RESTRICTED_BOUNDS_AREA = LatLngBounds.Builder()
             .include(BOUND_CORNER_NW)
             .include(BOUND_CORNER_SE)
@@ -345,6 +359,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
 
 }
+
+
 
 
 
