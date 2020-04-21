@@ -1,3 +1,27 @@
 <resources>
-    <string name="app_name">Prosjekt</string>
+    <string name="app_name">ProsjektIN2000</string>
+    <string name="latitude">latitude</string>
+    <string name="kart">KART</string>
+    <string name="ver">VÆR</string>
+    <string name="longitude">longitude</string>
+    <string name="havet">HAVET</string>
+    <string name="title">Title</string>
+    <string name="_2017_06_03_11_22_00">2017-06-03 11:22:00</string>
+    <string name="content">Content</string>
+    <string name="refresh">Refresh</string>
+    <string name="menu_refresh">Refresh</string>
+    <string-array name="fylker">
+        <item>Velg fylke</item>
+        <item>Oslo</item>
+        <item>Viken</item>
+        <item>Innlandet</item>
+        <item>Vestfold og Telemark</item>
+        <item>Agder</item>
+        <item>Rogaland</item>
+        <item>Vestland</item>
+        <item>Møre og Romsdal</item>
+        <item>Trøndelag</item>
+        <item>Nordland</item>
+        <item>Troms og Finnmark</item>
+    </string-array>
 </resources>

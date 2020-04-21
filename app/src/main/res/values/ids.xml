@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="txtContent" type="id" />
+    <item name="txtPubdate" type="id" />
+    <item name="txtTitle" type="id" />
+    <item name="latitude" type="id" />
+    <item name="longitude" type= "id"/>
+    <item name="menu_refresh" type="id" />
+</resources>
