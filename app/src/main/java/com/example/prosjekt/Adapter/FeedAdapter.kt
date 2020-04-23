@@ -1,12 +1,9 @@
 package com.example.prosjekt.Adapter
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +18,7 @@ class FeedViewHolder (itemView: View):RecyclerView.ViewHolder(itemView), View.On
     var txtPubdate = itemView.findViewById(R.id.txtPubdate) as TextView
     var txtContent = itemView.findViewById(R.id.txtContent) as TextView
     // var lesMerButton = itemView.findViewById(R.id.LesMerButton) as Button
+
     private var itemClickListener: ItemClickListener?=null
 
     init {
