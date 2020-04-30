@@ -1,22 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:mapbox="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".examples.camera.BoundingBoxCameraActivity">
 
-    <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/kart"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        mapbox:mapbox_cameraTargetLat="-26.145"
-        mapbox:mapbox_cameraTargetLng="134.312" />
 
-</FrameLayout>
--->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mapbox="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -24,38 +8,82 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-  <!--  <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        mapbox:layout_constraintGuide_begin="512dp" /> -->
+  <androidx.constraintlayout.widget.Guideline
+      android:id="@+id/guideline10"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="67dp"
+      android:orientation="horizontal"
+      mapbox:layout_constraintBottom_toTopOf="@+id/button"
+      mapbox:layout_constraintGuide_begin="602dp"
+      mapbox:layout_constraintTop_toBottomOf="@+id/kart" />
+  -->
 
-    <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/kart"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        mapbox:layout_constraintEnd_toEndOf="parent"
-        mapbox:layout_constraintStart_toStartOf="parent"
-        mapbox:layout_constraintTop_toTopOf="parent" />
+  <com.mapbox.mapboxsdk.maps.MapView
+      android:id="@+id/kart"
+      android:layout_width="418dp"
+      android:layout_height="0dp"
+      android:layout_marginBottom="2dp"
+      mapbox:layout_constraintBottom_toTopOf="@+id/guideline10"
+      mapbox:layout_constraintEnd_toEndOf="parent"
+      mapbox:layout_constraintStart_toStartOf="parent"
+      mapbox:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/shared_pref_saved_lat_textview"
-        android:layout_width="328dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        mapbox:layout_constraintStart_toStartOf="parent"
-        mapbox:layout_constraintTop_toTopOf="@+id/guideline10" />
 
-    <TextView
-        android:id="@+id/shared_pref_saved_long_textview"
-        android:layout_width="317dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        mapbox:layout_constraintStart_toStartOf="parent"
-        mapbox:layout_constraintTop_toBottomOf="@+id/shared_pref_saved_lat_textview" />
+  </com.mapbox.mapboxsdk.maps.MapView>
+
+  <TextView
+      android:id="@+id/shared_pref_saved_lat_textview"
+      android:layout_width="328dp"
+      android:layout_height="21dp"
+      android:layout_marginStart="32dp"
+      android:layout_marginTop="24dp"
+      mapbox:layout_constraintStart_toStartOf="parent"
+      mapbox:layout_constraintTop_toTopOf="@+id/guideline10" />
+
+  <TextView
+      android:id="@+id/shared_pref_saved_long_textview"
+      android:layout_width="317dp"
+      android:layout_height="21dp"
+      android:layout_marginStart="44dp"
+      mapbox:layout_constraintStart_toStartOf="parent"
+      mapbox:layout_constraintTop_toBottomOf="@+id/shared_pref_saved_lat_textview" />
+
+  <Button
+      android:id="@+id/button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="1dp"
+      android:text="Værvarsel"
+      mapbox:layout_constraintBottom_toBottomOf="parent"
+      mapbox:layout_constraintEnd_toStartOf="@+id/button2"
+      mapbox:layout_constraintStart_toStartOf="parent"
+      mapbox:layout_constraintTop_toTopOf="parent"
+      mapbox:layout_constraintVertical_bias="0.986" />
+
+  <Button
+      android:id="@+id/button2"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="5dp"
+      android:layout_marginBottom="10dp"
+      android:text="Bølgevarsel"
+      mapbox:layout_constraintBottom_toBottomOf="parent"
+      mapbox:layout_constraintEnd_toStartOf="@+id/button3"
+      mapbox:layout_constraintStart_toEndOf="@+id/button" />
+
+  <Button
+      android:id="@+id/button3"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="9dp"
+      android:layout_marginBottom="10dp"
+      android:text="ekstremvær"
+      mapbox:layout_constraintBottom_toBottomOf="parent"
+      mapbox:layout_constraintEnd_toEndOf="parent"
+      mapbox:layout_constraintStart_toEndOf="@+id/button2"
+      mapbox:layout_constraintTop_toTopOf="parent"
+      mapbox:layout_constraintVertical_bias="1.0" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

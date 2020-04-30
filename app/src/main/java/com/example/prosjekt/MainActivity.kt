@@ -19,7 +19,6 @@ import com.example.prosjekt.R
 import com.mapbox.geojson.Point
 import com.mapbox.geojson.Polygon
 import com.mapbox.mapboxsdk.Mapbox
-import com.mapbox.mapboxsdk.annotations.MarkerOptions
 import com.mapbox.mapboxsdk.camera.CameraPosition
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
@@ -40,10 +39,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
     private var sharedPreferences: SharedPreferences? = null
     private var longTextView: TextView? = null
     private var latTextView: TextView? = null
-    /*
+
     private var weather: Button? = null
     private var waves:  Button? = null
-    private var extreme:  Button? = null */
+    private var extreme:  Button? = null
     private var savedLat: Double = 0.toDouble()
     private var savedLong: Double = 0.toDouble()
 
@@ -56,11 +55,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         setContentView(R.layout.activity_main)
 
-        /*longTextView = findViewById(R.id.shared_pref_saved_long_textview)
+        longTextView = findViewById(R.id.shared_pref_saved_long_textview)
         latTextView = findViewById(R.id.shared_pref_saved_lat_textview)
         weather = findViewById(R.id.button)
         waves = findViewById(R.id.button2)
-        extreme = findViewById(R.id.button3)*/
+        extreme = findViewById(R.id.button3)
 
 
 
@@ -109,7 +108,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
 
                  {
-
+                     weather?.setVisibility(View.GONE)
+                     waves?.setVisibility(View.GONE)
+                     extreme?.setVisibility(View.GONE)
                      // Set the boundary area for the map camera(rectricted panning
                       //  showBoundsArea(style)
                      mapboxMap.setLatLngBoundsForCameraTarget(MainActivity.RESTRICTED_BOUNDS_AREA)
@@ -165,9 +166,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
                          // Move the marker to the previously-saved coordinates
                         moveMarkerToLngLat(savedLong,savedLat)
 
-                   //     longTextView!!.text = String.format(" longitude: ", savedLong.toString())
+                        longTextView!!.text = String.format(" longitude: ", savedLong.toString())
 
-                    //    latTextView!!.text = String.format(" latitude: ", savedLat.toString())
+                        latTextView!!.text = String.format(" latitude: ", savedLat.toString())
                      }
 
     }
@@ -179,8 +180,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
             val clickLongitude = mapClickPoint.longitude
 
             //Hente ut cliken og sette det i texten
-//            longTextView!!.text = clickLongitude.toString()
-     //       latTextView!!.text = clickLatitude.toString()
+           longTextView!!.text = clickLongitude.toString()
+           latTextView!!.text = clickLatitude.toString()
 
 
             // Save the map click point coordinates to shared preferences
@@ -190,7 +191,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
 
             }
-            /*
+
             //viser frem knappene når vi får koordinater, sjekk at de kommer bare når koordinatene gir mening
             weather?.setVisibility(View.VISIBLE)
             waves?.setVisibility(View.VISIBLE)
@@ -230,9 +231,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
             mapboxMap!!.getStyle { style ->
                 val clickLocationSource = style.getSourceAs<GeoJsonSource>(MainActivity.CLICK_LOCATION_SOURCE_ID)
                 clickLocationSource?.setGeoJson(Point.fromLngLat(newLong, newLat))
-                (MarkerOptions()
-                        .position(LatLng(getCoordinateFromSharedPref(SAVED_LAT_KEY), getCoordinateFromSharedPref(SAVED_LONG_KEY)))
-                        .title("Trykk her"))
+
             }
 
 
