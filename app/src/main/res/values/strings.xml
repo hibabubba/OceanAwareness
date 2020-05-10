@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Prosjekt</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiaGliYWJlIiwiYSI6ImNrOHVkcWQ5eDAxZWIzanFxbHpxZzhxbXcifQ.5LZQ6tZnTbUXugtbSTRG7A</string>
 </resources>

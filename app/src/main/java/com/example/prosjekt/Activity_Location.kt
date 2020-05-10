@@ -240,7 +240,7 @@ class Activity_Location : AppCompatActivity() {
     fun set_DayNight(time: String){
         var bakgrunn: ImageView = findViewById(R.id.Bakgrunn)
         if(time.toInt() in 6..22 ){ //sett på morgen bakgrunn
-            bakgrunn.setImageResource(R.drawable.sol)
+            bakgrunn.setImageResource(R.drawable.solaa)
             bakgrunn.setAdjustViewBounds(true);
             bakgrunn.setScaleType(ImageView.ScaleType.FIT_XY)
         }
