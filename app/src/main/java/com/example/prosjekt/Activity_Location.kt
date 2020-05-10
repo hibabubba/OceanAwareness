@@ -223,14 +223,14 @@ class Activity_Location : AppCompatActivity() {
             if(clouds in 0.0..12.5){
                 icon.setImageResource(R.drawable.sol)
             } else if(clouds in 12.5..37.5){
-                icon.setImageResource(R.drawable.part_clouds)
+                icon.setImageResource(R.drawable.lettskyet)
             } else if(clouds in 37.5..62.5){
-                icon.setImageResource(R.drawable.light_clouds)
+                icon.setImageResource(R.drawable.skyet)
             } else{ //63.5 og utover
-                icon.setImageResource(R.drawable.cloud)
+                icon.setImageResource(R.drawable.overskyet)
             }
         }else{
-            icon.setImageResource(R.drawable.sleep)
+            icon.setImageResource(R.drawable.maane)
         }
 
 
@@ -240,7 +240,7 @@ class Activity_Location : AppCompatActivity() {
     fun set_DayNight(time: String){
         var bakgrunn: ImageView = findViewById(R.id.Bakgrunn)
         if(time.toInt() in 6..22 ){ //sett på morgen bakgrunn
-            bakgrunn.setImageResource(R.drawable.solaa)
+            bakgrunn.setImageResource(R.drawable.dagbakgrunn)
             bakgrunn.setAdjustViewBounds(true);
             bakgrunn.setScaleType(ImageView.ScaleType.FIT_XY)
         }
