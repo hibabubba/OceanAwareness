@@ -55,6 +55,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         setContentView(R.layout.activity_main)
 
+
         longTextView = findViewById(R.id.shared_pref_saved_long_textview)
         latTextView = findViewById(R.id.shared_pref_saved_lat_textview)
         weather = findViewById(R.id.button)
@@ -172,6 +173,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
                      }
 
     }
+
 
     }
 
