@@ -354,3 +354,5 @@ class LocationActivity : AppCompatActivity() {
         println(data?.product?.time?.get(47))
         println(data?.product?.time?.get(48))
  */
+
+//Hanan brach
