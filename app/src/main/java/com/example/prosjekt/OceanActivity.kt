@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import okhttp3.Call
 import okhttp3.Callback
 
-class Activity_Ocean : AppCompatActivity() {
+class OceanActivity : AppCompatActivity() {
 
     private val  apiService = Apiproxyservice.create()
     private var data: Oceanforecast? = null
@@ -32,6 +32,8 @@ class Activity_Ocean : AppCompatActivity() {
     lateinit var location : TextView
     lateinit var arrow: ImageButton
     lateinit var mapbutton: ImageButton
+    private var longitude = 0.toDouble()
+    private var latitude = 0.toDouble()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +46,9 @@ class Activity_Ocean : AppCompatActivity() {
 
     private suspend fun fetchJson() {
 
-        val latitude = intent.getDoubleExtra("lati", 2000.00)
+        latitude = intent.getDoubleExtra("lati", 2000.00)
 
-        val  longitude  = intent.getDoubleExtra("longi", 2000.00)
+        longitude = intent.getDoubleExtra("longi", 2000.00)
         //SEtte lokasjon til activiteten
         location = findViewById(R.id.location)
         location.text = "LOKASJON: \n" + "Latitude = "+ latitude + "\n Longitude = "+ longitude
@@ -117,7 +119,10 @@ class Activity_Ocean : AppCompatActivity() {
 
      //Sette arrow og mapbutton til clicklistener
      arrow.setOnClickListener {
-         startActivity(Intent(this, MainActivity::class.java))
+         val intent = Intent(this, MenuActivity::class.java)
+         intent.putExtra("lati", latitude)
+         intent.putExtra("longi", longitude)
+         startActivity(intent)
      }
      mapbutton.setOnClickListener {
          startActivity(Intent(this, MainActivity::class.java))

@@ -15,6 +15,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageButton
 import com.example.prosjekt.R
 import com.mapbox.geojson.Point
 import com.mapbox.geojson.Polygon
@@ -40,9 +41,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
     private var longTextView: TextView? = null
     private var latTextView: TextView? = null
 
-    private var weather: Button? = null
-    private var waves:  Button? = null
-    private var extreme:  Button? = null
+    private lateinit var sjekkBtn : Button
+    private lateinit var settingsBtn : AppCompatImageButton
     private var savedLat: Double = 0.toDouble()
     private var savedLong: Double = 0.toDouble()
 
@@ -59,9 +59,14 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
         longTextView = findViewById(R.id.shared_pref_saved_long_textview)
         latTextView = findViewById(R.id.shared_pref_saved_lat_textview)
-        weather = findViewById(R.id.button)
-        waves = findViewById(R.id.button2)
-        extreme = findViewById(R.id.button3)
+        sjekkBtn = findViewById(R.id.button)
+        settingsBtn = findViewById(R.id.settingsButton)
+
+
+        settingsBtn.setOnClickListener{
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
+        }
 
 
 
@@ -110,9 +115,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
 
                  {
-                     weather?.setVisibility(View.GONE)
-                     waves?.setVisibility(View.GONE)
-                     extreme?.setVisibility(View.GONE)
+                     sjekkBtn.visibility = View.GONE
+
                      // Set the boundary area for the map camera(rectricted panning
                       //  showBoundsArea(style)
                      mapboxMap.setLatLngBoundsForCameraTarget(MainActivity.RESTRICTED_BOUNDS_AREA)
@@ -196,26 +200,18 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
             }
 
             //viser frem knappene når vi får koordinater, sjekk at de kommer bare når koordinatene gir mening
-            weather?.setVisibility(View.VISIBLE)
-            waves?.setVisibility(View.VISIBLE)
-            extreme?.setVisibility(View.VISIBLE)
+            sjekkBtn.visibility = View.VISIBLE
+
 
             //får hver click på en knapp gå inn i en ny activity
-            weather?.setOnClickListener{
-                val intent = Intent(this, Activity_Location::class.java)
+            sjekkBtn.setOnClickListener{
+                val intent = Intent(this, MenuActivity::class.java)
                 //ta med meg koordinatene
                 intent.putExtra("lati", getCoordinateFromSharedPref(SAVED_LAT_KEY))
                 intent.putExtra("longi", getCoordinateFromSharedPref(SAVED_LONG_KEY))
                 startActivity(intent)
             }
-            waves?.setOnClickListener{
-                val intent = Intent(this, Activity_Ocean::class.java)
-                //ta med meg koordinatene
-                intent.putExtra("lati", getCoordinateFromSharedPref(SAVED_LAT_KEY))
-                intent.putExtra("longi", getCoordinateFromSharedPref(SAVED_LONG_KEY))
-                startActivity(intent)
-            }
-            extreme?.setOnClickListener{} //SETT INN FOR METAALERTS*/
+
 
             // Move the marker to the newly-saved coordinates
             moveMarkerToLngLat(clickLongitude, clickLatitude )

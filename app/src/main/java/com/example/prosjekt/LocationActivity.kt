@@ -15,7 +15,7 @@ import com.example.prosjekt.Locationforecast.*
 import kotlinx.android.synthetic.main.activity__location.*
 
 
-class Activity_Location : AppCompatActivity() {
+class LocationActivity : AppCompatActivity() {
 
    private val  apiService = Apiproxyservice.create()
    private var data: Locationforecast? = null
@@ -30,6 +30,8 @@ class Activity_Location : AppCompatActivity() {
     lateinit var mapbutton:ImageButton
     lateinit var info: Show_info
     private var liste_med_info: ArrayList<Show_info> = ArrayList<Show_info>(50)
+    private var longitude = 0.toDouble()
+    private var latitude = 0.toDouble()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,9 +46,9 @@ class Activity_Location : AppCompatActivity() {
 
  private suspend fun fetchJson() {
             println("INNE")
-              val latitude = intent.getDoubleExtra("lati", 2000.00)
+     latitude = intent.getDoubleExtra("lati", 2000.00)
 
-             val  longitude  = intent.getDoubleExtra("longi", 2000.00)
+     longitude  = intent.getDoubleExtra("longi", 2000.00)
 
 
         var call = apiService.getLocationforecast(latitude, longitude)
@@ -102,7 +104,10 @@ class Activity_Location : AppCompatActivity() {
 
         //Sette arrow og mapbutton til clicklistener
         arrow.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+            val intent = Intent(this, MenuActivity::class.java)
+            intent.putExtra("lati", latitude)
+            intent.putExtra("longi", longitude)
+            startActivity(intent)
         }
         mapbutton.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))

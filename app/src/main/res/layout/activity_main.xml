@@ -17,7 +17,7 @@
       mapbox:layout_constraintBottom_toTopOf="@+id/button"
       mapbox:layout_constraintGuide_begin="602dp"
       mapbox:layout_constraintTop_toBottomOf="@+id/kart" />
-  -->
+
 
   <com.mapbox.mapboxsdk.maps.MapView
       android:id="@+id/kart"
@@ -31,6 +31,16 @@
 
 
   </com.mapbox.mapboxsdk.maps.MapView>
+
+  <androidx.appcompat.widget.AppCompatImageButton
+      android:id="@+id/settingsButton"
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:background="@null"
+      android:src="@drawable/ic_settings"
+      mapbox:layout_constraintStart_toStartOf="parent"
+      mapbox:layout_constraintTop_toTopOf="parent"
+      android:padding="5dp"/>
 
   <TextView
       android:id="@+id/shared_pref_saved_lat_textview"
@@ -54,36 +64,15 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="1dp"
-      android:text="Værvarsel"
+      android:text="sjekk hav og vær"
       mapbox:layout_constraintBottom_toBottomOf="parent"
-      mapbox:layout_constraintEnd_toStartOf="@+id/button2"
+      mapbox:layout_constraintEnd_toEndOf="parent"
       mapbox:layout_constraintStart_toStartOf="parent"
       mapbox:layout_constraintTop_toTopOf="parent"
       mapbox:layout_constraintVertical_bias="0.986" />
 
-  <Button
-      android:id="@+id/button2"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="5dp"
-      android:layout_marginBottom="10dp"
-      android:text="Bølgevarsel"
-      mapbox:layout_constraintBottom_toBottomOf="parent"
-      mapbox:layout_constraintEnd_toStartOf="@+id/button3"
-      mapbox:layout_constraintStart_toEndOf="@+id/button" />
 
-  <Button
-      android:id="@+id/button3"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginEnd="9dp"
-      android:layout_marginBottom="10dp"
-      android:text="ekstremvær"
-      mapbox:layout_constraintBottom_toBottomOf="parent"
-      mapbox:layout_constraintEnd_toEndOf="parent"
-      mapbox:layout_constraintStart_toEndOf="@+id/button2"
-      mapbox:layout_constraintTop_toTopOf="parent"
-      mapbox:layout_constraintVertical_bias="1.0" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
