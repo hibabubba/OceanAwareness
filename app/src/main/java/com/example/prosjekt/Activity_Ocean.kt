@@ -49,10 +49,10 @@ class Activity_Ocean : AppCompatActivity() {
         val  longitude  = intent.getDoubleExtra("longi", 2000.00)
         //SEtte lokasjon til activiteten
         location = findViewById(R.id.location)
-        location.text = "LOKASJON: \n" + "Latitude = "+ latitude + "\n Longitude = "+ longitude
+        location.text = "KOORDINATER: \n" + "Latitude = "+ latitude + "\nLongitude = "+ longitude
         //SEtte bakgrunn
         var bakgrunn: ImageView = findViewById(R.id.bakgrunn)
-            bakgrunn.setImageResource(R.drawable.ocean)
+            bakgrunn.setImageResource(R.drawable.dagbakgrunn)
             bakgrunn.setAdjustViewBounds(true);
             bakgrunn.setScaleType(ImageView.ScaleType.FIT_XY)
 

@@ -14,7 +14,11 @@
         android:id="@+id/arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/arrow" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@null"
+        app:srcCompat="@drawable/arrow"
+        />
 
 
     <!--
@@ -34,27 +38,27 @@
 
             <ImageView
                 android:id="@+id/imageView7"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="80dp"
-                app:srcCompat="@drawable/seatemp" />
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="60dp"
+                app:srcCompat="@drawable/temperatur" />
 
             <ImageView
                 android:id="@+id/imageView8"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="40dp"
-                app:srcCompat="@drawable/waveheight" />
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/bolgehoyde" />
 
             <ImageView
                 android:id="@+id/imageView9"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="40dp"
-                app:srcCompat="@drawable/seacurrentdir" />
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/stromretning" />
         </LinearLayout>
 
         <LinearLayout
@@ -99,19 +103,19 @@
 
             <ImageView
                 android:id="@+id/imageView11"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="40dp"
-                app:srcCompat="@drawable/seacurrentspeed" />
+                app:srcCompat="@drawable/stromfart" />
 
             <ImageView
                 android:id="@+id/imageView12"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_marginStart="40dp"
-                android:layout_marginTop="40dp"
-                app:srcCompat="@drawable/totwavedirekte" />
+                android:layout_marginTop="30dp"
+                app:srcCompat="@drawable/bolgeretning" />
         </LinearLayout>
 
         <LinearLayout
@@ -137,7 +141,7 @@
                 android:id="@+id/totwavedir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="60dp"
                 android:text="TextView" />
         </LinearLayout>
     </LinearLayout>
@@ -147,8 +151,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="80dp"
-        android:text="Lokasjon"
+        android:layout_marginTop="30dp"
+        android:text="Koordinater:"
         />
 
     <SeekBar
@@ -173,6 +177,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="170dp"
         android:layout_marginTop="550dp"
-        app:srcCompat="@drawable/ic_menu_mapmode" />
+        android:background="@null"
+        app:srcCompat="@drawable/menykart" />
 
 </FrameLayout>

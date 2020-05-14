@@ -10,7 +10,8 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/Bakgrunn"/>
+        android:id="@+id/Bakgrunn"
+        android:contentDescription="@string/skjermbakgrunn" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,7 +24,8 @@
             android:background="@null"
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
-            app:srcCompat="@drawable/arrow" />
+            app:srcCompat="@drawable/arrow"
+            android:contentDescription="@string/tilbakeknapp" />
 
         <RelativeLayout
             android:id="@+id/relativ"
@@ -56,7 +58,7 @@
 
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
@@ -359,8 +361,16 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="30dp"
                     app:srcCompat="@drawable/vindstyrke" />
+
+                <ImageView
+                    android:id="@+id/imageView8"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="35dp"
+                    app:srcCompat="@drawable/regn" />
 
 
             </LinearLayout>
@@ -368,7 +378,7 @@
             <LinearLayout
                 android:id="@+id/andretext"
                 android:layout_width="110dp"
-                android:layout_height="200dp"
+                android:layout_height="250dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -386,6 +396,14 @@
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="40dp"
                     android:text="windspeed" />
+
+                <TextView
+                    android:id="@+id/temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="40dp"
+                    android:text="tempratur" />
 
 
             </LinearLayout>
