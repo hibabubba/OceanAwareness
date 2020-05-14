@@ -1,18 +1,6 @@
 <resources>
     <string name="app_name">Prosjekt</string>
     <string name="mapbox_access_token">pk.eyJ1IjoiaGliYWJlIiwiYSI6ImNrOHVkcWQ5eDAxZWIzanFxbHpxZzhxbXcifQ.5LZQ6tZnTbUXugtbSTRG7A</string>
-    <string name="nattmodus">Nattmodus</string>
-    <string name="om_appen">Om appen</string>
-    <string name="om_redningstjenesten">Om redningstjenesten</string>
-    <string name="av">Av</string>
-    <string name="p">På</string>
-    <string name="innstillinger">Innstillinger</string>
-    <string name="havaktivitet">Havaktivitet</string>
-    <string name="ekstremv_rvarsel">EKSTREMVÆRVARSEL</string>
-    <string name="title">Title</string>
-    <string name="content">Content</string>
-    <string name="_2020_03_30">2020-03-30</string>
-    <string name="v_rvarsel">Værvarsel</string>
-    <string name="b_lgevarsel">Bølgevarsel</string>
-    <string name="ekstremv_r">ekstremvær</string>
+    <string name="skjermbakgrunn">Skjermbakgrunn</string>
+    <string name="tilbakeknapp">tilbakeknapp</string>
 </resources>
