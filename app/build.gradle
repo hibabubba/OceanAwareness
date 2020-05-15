@@ -24,7 +24,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
 }
+
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -69,7 +72,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.2.0"
     kapt "androidx.lifecycle:lifecycle-compiler:2.2.0"
-    implementation "androidx.activity:activity-ktx:1.1.0"
+    //implementation "androidx.activity:activity-ktx:1.1.0"
+    implementation 'androidx.fragment:fragment-ktx:1.2.0-alpha01'
+
 
 
 }

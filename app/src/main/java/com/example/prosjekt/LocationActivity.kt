@@ -45,7 +45,7 @@ class LocationActivity : AppCompatActivity() {
 
 
  private suspend fun fetchJson() {
-            println("INNE")
+            println("INNElocation")
      latitude = intent.getDoubleExtra("lati", 2000.00)
 
      longitude  = intent.getDoubleExtra("longi", 2000.00)

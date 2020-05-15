@@ -1,21 +1,35 @@
 package com.example.prosjekt
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.prosjekt.RSS.ApiproxyserviceRSS
 import com.example.prosjekt.RSS.FeedAdapter
 import com.example.prosjekt.RSS.RSSObject
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.coroutines.awaitString
-import com.google.gson.Gson
-import kotlinx.coroutines.*
-import java.lang.StringBuilder
+import com.example.prosjekt.Repository.Repository
+import com.example.prosjekt.Service.Service
+import com.example.prosjekt.ViewModel.MenuActivityViewModel
+import com.example.prosjekt.ViewModelFactory.MenuActivityViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+
+
+object Injection {
+    val service: Service by lazy { Service() }
+    val repository: Repository by lazy { Repository(service) }
+    val viewModelFactory: MenuActivityViewModelFactory by lazy {
+        MenuActivityViewModelFactory(repository)
+    }
+}
 
 class MenuActivity : AppCompatActivity() {
     //Widgets
@@ -28,8 +42,9 @@ class MenuActivity : AppCompatActivity() {
     private var lat = 0.toDouble()
     private var long = 0.toDouble()
 
+
     //
-    //private val  apiService = ApiproxyserviceRSS.create()
+    private val  apiService = ApiproxyserviceRSS.create()
     private lateinit var data : RSSObject
 
 
@@ -40,29 +55,44 @@ class MenuActivity : AppCompatActivity() {
 
 
 
+
+        lat = intent.getDoubleExtra("lati", 2000.00)
+        long = intent.getDoubleExtra("longi", 2000.00)
+
+        println("HEI NÅ FUNKER DET BITCHESSS")
+        println("activity, long: $long")
+        println("activity, lat: $lat")
+
+       /* val viewModel: MenuActivityViewModel =
+            ViewModelProviders.of(this, Injection.viewModelFactory).get(MenuActivityViewModel::class.java)
+*/
+        val viewModel: MenuActivityViewModel by viewModels {
+            Injection.viewModelFactory
+        }
+
+        val liveData: LiveData<RSSObject> = viewModel.getData()
+        liveData.observe(this, Observer<RSSObject> { result ->
+            println("inni observer")
+            setView(result) // update UI
+        })
+/*
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.setCustomObject(lat, long)
+        }*/
+
+        viewModel.setCustomValue(lat, long)
+
+
+
+
+
         havaktivitetButton = findViewById(R.id.havaktivitetButton)
         vaervarselButton = findViewById(R.id.vaervarselButton)
         rssRecyclerview = findViewById(R.id.rssRecyclerView)
-
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL, false)
         rssRecyclerview.layoutManager = linearLayoutManager
 
-        /*
-        CoroutineScope(Dispatchers.IO).launch {
-            if (fetchJson()) {
-                withContext(Dispatchers.Main) {
-                    setView(data)
 
-                }
-            }
-        }*/
-
-
-        if (getCoordinates()) {
-            getFeed(buildUrl())
-        } else {
-            Toast.makeText(this, "Funket ikke", Toast.LENGTH_LONG).show()
-        }
 
 
 
@@ -93,56 +123,23 @@ class MenuActivity : AppCompatActivity() {
 
     }
 
+    private fun setView(result: RSSObject) {
+        println("setview")
+        val adapter = FeedAdapter(result,baseContext)
+        rssRecyclerview.adapter = adapter
+        adapter.notifyDataSetChanged()
 
-    fun getCoordinates() : Boolean {
-        //val bundle:Bundle? = intent.extras
-        lat = intent.getDoubleExtra("lati", 2000.00)
-        long = intent.getDoubleExtra("longi", 2000.00)
+        if (adapter.itemCount == 0) {
+            val ekstrem = findViewById<View>(R.id.ekstremTextView)
+            ekstrem.visibility = View.GONE
 
-        if (lat != 2000.00 && long != 2000.00) {
-            Toast.makeText(this, "Hentet koordinater", Toast.LENGTH_LONG).show()
-            return true
         }
 
-        Toast.makeText(this, "Kooridnater ikke funnet", Toast.LENGTH_LONG).show()
-        return false
     }
 
-    /*
-    private suspend fun fetchJson() : Boolean {
-        println("INNE")
-        var result = false
 
+/*
 
-
-        lat = intent.getDoubleExtra("lati", 2000.00)
-        long = intent.getDoubleExtra("longi", 2000.00)
-
-        // val latitude = 59.429317
-        //   val longitude = 10.545646
-
-        val call = apiService.getRSSfeed(lat, long)
-        call.enqueue(object : retrofit2.Callback<RSSObject> {
-            override fun onFailure(call: retrofit2.Call<RSSObject>, t: Throwable) {
-                println("FAILET IGJEN")
-            }
-
-            override fun onResponse(
-                call: retrofit2.Call<RSSObject>,
-                response: retrofit2.Response<RSSObject>
-            ) {
-                if (response.isSuccessful) {
-                    data = response.body()
-                    result = true
-                }
-            }
-        })
-
-        return result
-
-
-
-    }*/
 
     fun buildUrl()  : String {
         val rssLink = "https://api.met.no/weatherapi/metalerts/1.1/"
@@ -171,29 +168,18 @@ class MenuActivity : AppCompatActivity() {
 
             }
         }
-    }
+    }*/
 
     //Bruker feed-adapter til å sette recyclerview
-    private fun setView(result: RSSObject) {
-        val adapter = FeedAdapter(result,baseContext)
-        rssRecyclerview.adapter = adapter
-        adapter.notifyDataSetChanged()
-
-        if (adapter.itemCount == 0) {
-            val ekstrem = findViewById<View>(R.id.ekstremTextView)
-            ekstrem.visibility = View.GONE
-
-        }
-
-    }
 
 
+/*
     //Lager et RSS-objekt ved å hente ut info fra APIet
     suspend fun lagListe(url: String) : RSSObject {
         val response = Fuel.get(url).awaitString()
         return Gson().fromJson<RSSObject>(response, RSSObject::class.java)
 
-    }
+    }*/
 
 }
 
