@@ -70,9 +70,9 @@ class Service {
 
         var RSSresult : RSSObject? = null
 
-        val  apiService = ApiproxyserviceRSS.create()
+       // val  apiService = ApiproxyserviceRSS()
 
-        val call = apiService.getRSSfeedAsync(latitude, longitude)
+       // val call = apiService.getRSSfeedAsync(latitude, longitude)
 
         /*call.enqueue(object : retrofit2.Callback<RSSObject> {
             override fun onFailure(call: retrofit2.Call<RSSObject>, t: Throwable) {

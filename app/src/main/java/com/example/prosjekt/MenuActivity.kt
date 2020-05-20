@@ -18,14 +18,12 @@ import com.example.prosjekt.Repository.Repository
 import com.example.prosjekt.Service.Service
 import com.example.prosjekt.ViewModel.MenuActivityViewModel
 import com.example.prosjekt.ViewModelFactory.MenuActivityViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 
 object Injection {
-    val service: Service by lazy { Service() }
-    val repository: Repository by lazy { Repository(service) }
+
+    val repository: Repository by lazy { Repository() }
     val viewModelFactory: MenuActivityViewModelFactory by lazy {
         MenuActivityViewModelFactory(repository)
     }
@@ -37,24 +35,19 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var vaervarselButton : Button
     private lateinit var rssRecyclerview : RecyclerView
 
-
     //koordinater
     private var lat = 0.toDouble()
     private var long = 0.toDouble()
 
 
-    //
-    private val  apiService = ApiproxyserviceRSS.create()
-    private lateinit var data : RSSObject
+    // private val  apiService = ApiproxyserviceRSS.create()
+    //private lateinit var data : RSSObject
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
-
-
-
 
         lat = intent.getDoubleExtra("lati", 2000.00)
         long = intent.getDoubleExtra("longi", 2000.00)
@@ -73,27 +66,35 @@ class MenuActivity : AppCompatActivity() {
         val liveData: LiveData<RSSObject> = viewModel.getData()
         liveData.observe(this, Observer<RSSObject> { result ->
             println("inni observer")
-            setView(result) // update UI
+
+            val adapter = FeedAdapter(result,baseContext)
+            //val antall = adapter.itemCount
+            //println(antall)
+
+            rssRecyclerview.adapter = adapter
+            adapter.notifyDataSetChanged()
+
+            val ekstrem = findViewById<View>(R.id.ekstremTextView)
+            if (adapter.itemCount == 0) {
+                ekstrem.visibility = View.GONE
+            } else {
+                ekstrem.visibility = View.VISIBLE
+            }
+            /*}
+            CoroutineScope(Dispatchers.Main).launch{
+                setView(result)
+            }*/
+             // update UI
         })
-/*
-        CoroutineScope(Dispatchers.IO).launch {
-            viewModel.setCustomObject(lat, long)
-        }*/
+
 
         viewModel.setCustomValue(lat, long)
-
-
-
-
 
         havaktivitetButton = findViewById(R.id.havaktivitetButton)
         vaervarselButton = findViewById(R.id.vaervarselButton)
         rssRecyclerview = findViewById(R.id.rssRecyclerView)
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL, false)
         rssRecyclerview.layoutManager = linearLayoutManager
-
-
-
 
 
         havaktivitetButton.setOnClickListener {
@@ -123,22 +124,31 @@ class MenuActivity : AppCompatActivity() {
 
     }
 
-    private fun setView(result: RSSObject) {
+    /*
+    private suspend fun setView(result: RSSObject) {
         println("setview")
-        val adapter = FeedAdapter(result,baseContext)
-        rssRecyclerview.adapter = adapter
-        adapter.notifyDataSetChanged()
 
-        if (adapter.itemCount == 0) {
-            val ekstrem = findViewById<View>(R.id.ekstremTextView)
-            ekstrem.visibility = View.GONE
+        withContext(Dispatchers.Main) {
+            val adapter = FeedAdapter(result,baseContext)
+            val antall = adapter.itemCount
+            println(antall)
 
+
+            rssRecyclerview.adapter = adapter
+            adapter.notifyDataSetChanged()
+
+            if (adapter.itemCount == 0) {
+                val ekstrem = findViewById<View>(R.id.ekstremTextView)
+                ekstrem.visibility = View.GONE
+
+            }
         }
+
 
     }
 
 
-/*
+
 
 
     fun buildUrl()  : String {

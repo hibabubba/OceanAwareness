@@ -1,5 +1,6 @@
 package com.example.prosjekt.Repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.liveData
@@ -8,83 +9,51 @@ import com.example.prosjekt.Oceanforecast.Oceanforecast
 import com.example.prosjekt.RSS.ApiproxyserviceRSS
 import com.example.prosjekt.RSS.RSSObject
 import com.example.prosjekt.Service.Service
+import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.FuelError
+import com.github.kittinunf.fuel.coroutines.awaitString
+import com.google.gson.Gson
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class Repository(private val service: Service) {
+class Repository() {
     //val apiRSS = ApiproxyserviceRSS.create()
 
-    val liveDataRSS = MutableLiveData<RSSObject>()
-
-    fun getRSSFeed(latitude: Double, longitude: Double) {
-
-        println("long, service: $longitude")
-        println("lat, service: $latitude")
-
-        val  apiService = ApiproxyserviceRSS.create()
-
-        val call = apiService.getRSSfeedAsync(latitude, longitude)
-
-        call.enqueue(object : retrofit2.Callback<RSSObject> {
-            override fun onFailure(call: retrofit2.Call<RSSObject>, t: Throwable) {
-            }
-
-            override fun onResponse(
-                call: retrofit2.Call<RSSObject>,
-                response: retrofit2.Response<RSSObject>
-            ) {
-                if (response.isSuccessful) {
-                    println("service")
-                    liveDataRSS.value = response.body()
+     val liveDataRSS = MutableLiveData<RSSObject>()
 
 
-                }
-            }
-        })
+    private fun buildLink(lat : Double, long: Double) : String {
+        val rssLink = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fin2000-apiproxy.ifi.uio.no%2Fweatherapi%2Fmetalerts%2F1.1%2F%3Flat%3D"
 
+        val latString = "%.6f".format(lat)
+        val longString = "%.6f".format(long)
+        val url_get_data = StringBuilder(rssLink)
+
+        url_get_data.append(latString)
+        url_get_data.append("%26lon%3D")
+        url_get_data.append(longString)
+
+
+
+        return url_get_data.toString()
     }
 
 
 
+    suspend fun fetchRSSFeed(lat : Double, long: Double) {
 
+        try {
+            val response = Fuel.get(buildLink(lat, long)).awaitString()
+            val result = Gson().fromJson<RSSObject>(response, RSSObject::class.java)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   /* private val liveDataLocation = MutableLiveData<Locationforecast>()
-
-    private val liveDataOcean = MutableLiveData<Oceanforecast>()
-
-    //val liveDataRSS = MutableLiveData<RSSObject>()
-
-    fun getLocationforecast(lat : Double, long : Double) { liveDataLocation.value = service.getLocationForecast(lat, long) }
-
-    fun getOceanforecast(lat : Double, long : Double) { liveDataOcean.value = service.getOceanForecast(lat, long) }
-
-    //fun getRSSFeed(lat : Double, long : Double) : LiveData<RSSObject> {
-    RSS = liveData(IO) {
-        val forecast = getForecast(lat, long)
-            emit(forecast)
+            withContext(Dispatchers.Main) {
+                liveDataRSS.value = result
+            }
+        } catch (e : FuelError) {
+            println("feil i fuel" + e.message)
         }
-
     }
-
-    private suspend fun getForecast(lat : Double, long : Double) : RSSObject{
-        return apiRSS.getRSSfeedAsync(lat, long).await()
-    }*/
-
-
-
-
 }

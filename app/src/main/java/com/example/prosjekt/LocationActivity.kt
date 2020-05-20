@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -12,6 +14,7 @@ import com.example.prosjekt.Show_info
 
 
 import com.example.prosjekt.Locationforecast.*
+import com.example.prosjekt.ViewModel.LocationActivityViewModel
 import kotlinx.android.synthetic.main.activity__location.*
 
 
@@ -38,8 +41,28 @@ class LocationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity__location)
 
-        CoroutineScope(Dispatchers.IO).launch {
-           fetchJson()}
+        val viewModel = LocationActivityViewModel()
+
+        val liveData : LiveData<Locationforecast> = viewModel.getData()
+        liveData.observe(this, Observer<Locationforecast> { result ->
+
+            data = result
+            println(result)
+
+            println("inni observer")
+            create_activity()
+            println("etter create")
+
+            //create_scrollview()
+
+
+        })
+
+
+        viewModel.setCustomValue(latitude, longitude)
+
+        //CoroutineScope(Dispatchers.IO).launch {
+           //fetchJson()}
    }
 
 
@@ -68,7 +91,7 @@ class LocationActivity : AppCompatActivity() {
                     create_activity()
 
                     //lage scrollviet for de neste 48 timene
-                    create_scrollview()
+                    //create_scrollview()
 
 
 
@@ -119,7 +142,7 @@ class LocationActivity : AppCompatActivity() {
 
     fun create_scrollview(){
         //hente alle 48 imagebuttonene
-      var liste =  listOf<ImageButton>(findViewById(R.id.id1), findViewById(R.id.id2), findViewById(R.id.id3), findViewById(R.id.id4), findViewById(R.id.id5),
+      val liste =  listOf<ImageButton>(findViewById(R.id.id1), findViewById(R.id.id2), findViewById(R.id.id3), findViewById(R.id.id4), findViewById(R.id.id5),
           findViewById(R.id.id6), findViewById(R.id.id7), findViewById(R.id.id8),findViewById(R.id.id9),findViewById(R.id.id10), findViewById(R.id.id11),
           findViewById(R.id.id12), findViewById(R.id.id13), findViewById(R.id.id14), findViewById(R.id.id15), findViewById(R.id.id16), findViewById(R.id.id17),
           findViewById(R.id.id18), findViewById(R.id.id19), findViewById(R.id.id20), findViewById(R.id.id21), findViewById(R.id.id22) , findViewById(R.id.id23),
@@ -129,7 +152,7 @@ class LocationActivity : AppCompatActivity() {
           findViewById(R.id.id42), findViewById(R.id.id43), findViewById(R.id.id44), findViewById(R.id.id45),findViewById(R.id.id46) , findViewById(R.id.id47),
           findViewById(R.id.id48))
         //hente alle 48 textviewene
-        var list =  listOf<TextView>(findViewById(R.id.iD1), findViewById(R.id.iD2), findViewById(R.id.iD3), findViewById(R.id.iD4), findViewById(R.id.iD5),
+        val list =  listOf<TextView>(findViewById(R.id.iD1), findViewById(R.id.iD2), findViewById(R.id.iD3), findViewById(R.id.iD4), findViewById(R.id.iD5),
             findViewById(R.id.iD6), findViewById(R.id.iD7), findViewById(R.id.iD8),findViewById(R.id.iD9),findViewById(R.id.iD10), findViewById(R.id.iD11),
             findViewById(R.id.iD12), findViewById(R.id.iD13), findViewById(R.id.iD14), findViewById(R.id.iD15), findViewById(R.id.iD16), findViewById(R.id.iD17),
             findViewById(R.id.iD18), findViewById(R.id.iD19), findViewById(R.id.iD20), findViewById(R.id.iD21), findViewById(R.id.iD22) , findViewById(R.id.iD23),
@@ -155,12 +178,12 @@ class LocationActivity : AppCompatActivity() {
         }
     }
 
-    fun get_info(plass:Int): Show_info {
+    fun get_info(plass : Int) : Show_info {
         info = Show_info(
         hoved =  data?.product?.time?.get(plass)?.location?.temperature?.value+ "°C",
         cloud = " Skyer: \n" + data?.product?.time?.get(plass)?.location?.cloudiness?.percent+ "%",
         fog = "Tåke: \n" + data?.product?.time?.get(plass)?.location?.fog?.percent+ "%",
-        humid= " Luftfuktighet: \n" + data?.product?.time?.get(plass)?.location?.humidity?.value,
+        humid = " Luftfuktighet: \n" + data?.product?.time?.get(plass)?.location?.humidity?.value,
         windDir = "Vindretning: "+ data?.product?.time?.get(plass)?.location?.windDirection?.name + "\n Grader:"+ data?.product?.time?.get(plass)?.location?.windDirection?.deg,
         windSpeed = "Vindstyrke: \n" + data?.product?.time?.get(plass)?.location?.windSpeed?.mps+ "Meter per sekund")
         return info
@@ -168,16 +191,16 @@ class LocationActivity : AppCompatActivity() {
     }
 
     fun show_info( button: Show_info ){
-        hoved.text= button.hoved
-        cloud.text =button.cloud
-        fog.text =button.fog
+        hoved.text = button.hoved
+        cloud.text = button.cloud
+        fog.text = button.fog
         humid.text = button.humid
         windDir.text = button.windDir
         windSpeed.text = button.windSpeed
     }
 
     fun set_dataImage_forcast(liste: List<ImageButton>, list: List<TextView>) {
-        var teller = 0;
+        var teller = 0
         for (nr in 0..47) {
             if (nr in 0..3) { //de 3 første har 2 mellom seg
                 teller += 2
