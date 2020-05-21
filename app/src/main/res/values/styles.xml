@@ -4,12 +4,13 @@
     <!-- Light/Day Mode theme -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#054B7D</item>
+        <item name="colorPrimary">#0D69AC</item>
         <item name="colorPrimaryDark">#0C4378</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="backgroundcolor">#85C1EA</item>
         <item name="textcolor">#000509</item>
         <item name="buttoncolor">#64A5D8</item>
+        <item name="buttoncolor2">#FFFFFF</item>
         <item name="buttontint">#880E4F</item>
         <item name="scrollbarcolor">#51A0DE</item>
 
@@ -19,12 +20,13 @@
     <!-- Dark/night Mode theme -->
     <style name="darktheme" parent="Theme.AppCompat.DayNight">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">#012743</item>
+        <item name="colorPrimary">#113753</item>
         <item name="colorPrimaryDark">#00060C</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="backgroundcolor">#81858B</item>
         <item name="textcolor">#FFFFFF</item>
         <item name="buttoncolor">#012743</item>
+        <item name="buttoncolor2">#81858B</item>
         <item name="buttontint">#880E4F</item>
         <item name="scrollbarcolor">#3E4245</item>
 

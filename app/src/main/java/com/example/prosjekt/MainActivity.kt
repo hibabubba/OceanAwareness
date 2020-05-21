@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.Color.WHITE
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.preference.PreferenceManager
@@ -26,11 +27,15 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.geometry.LatLngBounds
 import com.mapbox.mapboxsdk.maps.*
+import com.mapbox.mapboxsdk.plugins.annotation.FillOptions
 import com.mapbox.mapboxsdk.style.layers.FillLayer
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
+import com.mapbox.mapboxsdk.utils.ColorUtils.colorToRgbaString
+import kotlinx.android.synthetic.main.activity_main.view.*
 import java.util.ArrayList
+import okhttp3.internal.checkOffsetAndCount as checkOffsetAndCount1
 
 
 class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClickListener {
@@ -50,14 +55,12 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
             setTheme(R.style.darktheme)
         } else {
             setTheme(R.style.AppTheme)
         }
 
-        //slett
         Mapbox.getInstance(this, "pk.eyJ1IjoiaGliYWJlIiwiYSI6ImNrOHVkcWQ5eDAxZWIzanFxbHpxZzhxbXcifQ.5LZQ6tZnTbUXugtbSTRG7A")
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
@@ -91,17 +94,25 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
 
         mapboxMap.setStyle(
+            if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
+                setTheme(R.style.darktheme)
+                Style.Builder().fromUri(Style.DARK)
+            } else {
+                setTheme(R.style.AppTheme)
+                Style.Builder().fromUri(Style.MAPBOX_STREETS)
+            }
 
-                     Style.Builder().fromUri(Style.MAPBOX_STREETS)
+                     //Style.Builder().fromUri(Style.MAPBOX_STREETS)
 
 
 
                          // Add the SymbolLayer icon image to the map style
-                         .withImage(
+                        /* .withImage(
                              CLICK_LOCATION_ICON_ID, BitmapFactory.decodeResource(
                                  this@MainActivity.resources, R.drawable.marker_black
                              )
-                         )
+                         )*/
+                         //.withLayer(showCrosshair())
                         // Adding a GeoJson source for the SymbolLayer icons.
                         .withSource(GeoJsonSource(CLICK_LOCATION_SOURCE_ID))
 
@@ -109,20 +120,22 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
                         // marker icon gets fixed to the coordinate, rather than the middle of the icon being fixed to
                         // the coordinate point. This is offset is not always needed and is dependent on the image
                         // that you use for the SymbolLayer icon.
-                        .withLayer(
+                     /*   .withLayer(
                             SymbolLayer(CLICK_LOCATION_LAYER_ID, CLICK_LOCATION_SOURCE_ID)
                                 .withProperties(
                                     PropertyFactory.iconImage(CLICK_LOCATION_ICON_ID),
                                     PropertyFactory.iconAllowOverlap(true),
-                                    PropertyFactory.iconOffset(arrayOf(0f, -9f))
+                                   PropertyFactory.iconOffset(arrayOf(0f, -9f))
                                 )
-                        )
+                        )*/
+
 
                  )
 
 
                  {
                      sjekkBtn.visibility = View.GONE
+
 
                      // Set the boundary area for the map camera(rectricted panning
                       //  showBoundsArea(style)
@@ -179,7 +192,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
                          // Move the marker to the previously-saved coordinates
                         moveMarkerToLngLat(savedLong,savedLat)
 
-                        longTextView!!.text = String.format(" longitude: ", savedLong.toString())
+                       longTextView!!.text = String.format(" longitude: ", savedLong.toString())
 
                         latTextView!!.text = String.format(" latitude: ", savedLat.toString())
                      }
@@ -194,7 +207,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
             val clickLongitude = mapClickPoint.longitude
 
             //Hente ut cliken og sette det i texten
-           longTextView!!.text = clickLongitude.toString()
+          longTextView!!.text = clickLongitude.toString()
            latTextView!!.text = clickLatitude.toString()
 
 
@@ -291,12 +304,33 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
             )
         )
     }
-    private fun showCrosshair() {
+   /* private fun showCrosshair() {
         val crosshair = View(this) //lager nytt view
-        crosshair.layoutParams = FrameLayout.LayoutParams(15, 15, Gravity.CENTER) //størelsen på firkant
-        crosshair.setBackgroundColor(Color.GREEN) //farge på firkant
+        this.layoutParams = FrameLayout.LayoutParams(600, 150, Gravity.TOP) //størelsen på firkant
+        this.elevation= 10F
+        //crosshair.offsetLeftAndRight(10)
+      /*  crosshair.setOnClickListener {
+            val intent = Intent(this, MenuActivity::class.java)
+            //ta med meg koordinatene
+            intent.putExtra("lati", getCoordinateFromSharedPref(SAVED_LAT_KEY))
+            intent.putExtra("longi", getCoordinateFromSharedPref(SAVED_LONG_KEY))
+            startActivity(intent)
+        }*/
+        crosshair.run {
+            layoutParams = FrameLayout.LayoutParams(600, 150, Gravity.TOP) //størelsen på firkant
+            elevation = 10F
+            //crosshair.offsetLeftAndRight(10)
+            /*  crosshair.setOnClickListener {
+                  val intent = Intent(this, MenuActivity::class.java)
+                  //ta med meg koordinatene
+                  intent.putExtra("lati", getCoordinateFromSharedPref(SAVED_LAT_KEY))
+                  intent.putExtra("longi", getCoordinateFromSharedPref(SAVED_LONG_KEY))
+                  startActivity(intent)
+              }*/
+            setBackgroundColor(0)
+        } //farge på firkant
         map!!.addView(crosshair) //legger den til i viewet
-    }
+    }*/
 
     override fun onStart() {
         super.onStart()
@@ -364,6 +398,8 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
 
 }
+
+
 
 
 

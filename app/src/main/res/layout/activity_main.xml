@@ -58,6 +58,7 @@
       android:textColor="?attr/textcolor"
       android:layout_width="328dp"
       android:layout_height="21dp"
+      android:text="HEI"
       android:layout_marginStart="32dp"
       android:layout_marginTop="24dp"
       mapbox:layout_constraintStart_toStartOf="parent"
@@ -74,11 +75,12 @@
 
   <Button
       android:id="@+id/button"
-      android:textColor="?attr/textcolor"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="1dp"
-      android:text="sjekk hav og vær"
+      android:background="?attr/buttoncolor2"
+      android:text="@string/sjekk_hav_og_v_r"
+      android:textColor="?attr/textcolor"
       mapbox:layout_constraintBottom_toBottomOf="parent"
       mapbox:layout_constraintEnd_toEndOf="parent"
       mapbox:layout_constraintStart_toStartOf="parent"

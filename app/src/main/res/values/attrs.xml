@@ -4,6 +4,7 @@
         <attr name="backgroundcolor" format="color"/>
         <attr name="textcolor" format="color"/>
         <attr name="buttoncolor" format="color"/>
+        <attr name="buttoncolor2" format="color"/>
         <attr name="buttontint" format="color"/>
         <attr name="scrollbarcolor" format="color"/>
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Ocean Awarness</string>
+    <string name="app_name" >Ocean Awarness </string>
     <string name="mapbox_access_token">pk.eyJ1IjoiaGliYWJlIiwiYSI6ImNrOHVkcWQ5eDAxZWIzanFxbHpxZzhxbXcifQ.5LZQ6tZnTbUXugtbSTRG7A</string>
     <string name="skjermbakgrunn">Skjermbakgrunn</string>
     <string name="tilbakeknapp">tilbakeknapp</string>
@@ -35,4 +35,5 @@
     <string name="dato">Dato:</string>
     <string name="kompass">Kompass</string>
     <string name="knapp">knapp</string>
+    <string name="sjekk_hav_og_v_r">Sjekk hav og vær</string>
 </resources>

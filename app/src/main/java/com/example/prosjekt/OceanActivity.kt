@@ -4,9 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.prosjekt.Locationforecast.Locationforecast
 import com.example.prosjekt.Oceanforecast.Oceanforecast
+import com.example.prosjekt.ViewModel.OceanActivityViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -18,6 +21,7 @@ class OceanActivity : AppCompatActivity() {
     private val  apiService = Apiproxyservice.create()
     private var data: Oceanforecast? = null
 
+    private val viewModel : OceanActivityViewModel = OceanActivityViewModel()
     private var liste_med_info: ArrayList<Show_ocean_info> = ArrayList<Show_ocean_info>(50)
     lateinit var info: Show_ocean_info
 
@@ -28,7 +32,7 @@ class OceanActivity : AppCompatActivity() {
     lateinit var totalwavedirection: TextView
     lateinit var waveheight : TextView
     lateinit var date: TextView
-    lateinit var time: TextView
+   // lateinit var time: TextView
     lateinit var location : TextView
     lateinit var arrow: ImageButton
     lateinit var mapbutton: ImageButton
@@ -45,45 +49,34 @@ class OceanActivity : AppCompatActivity() {
         }
 
         setContentView(R.layout.activity__ocean)
-        CoroutineScope(Dispatchers.IO).launch {
-            fetchJson()}
-    }
-
-
-
-    private suspend fun fetchJson() {
-
         latitude = intent.getDoubleExtra("lati", 2000.00)
 
-        longitude = intent.getDoubleExtra("longi", 2000.00)
-        //SEtte lokasjon til activiteten
+        longitude  = intent.getDoubleExtra("longi", 2000.00)
+        //Sette lokasjon til activiteten
         location = findViewById(R.id.location)
         location.text = "KOORDINATER: \n" + "Latitude = "+ latitude + "\nLongitude = "+ longitude
 
 
+        val liveData : LiveData<Oceanforecast> = viewModel.getData()
+        liveData.observe(this, Observer<Oceanforecast> { result ->
+            data = result
+            println(result)
 
-        var call = apiService.getOceanforecast(latitude, longitude)
-            call.enqueue(object : retrofit2.Callback<Oceanforecast> {
-                override fun onFailure(call: retrofit2.Call<Oceanforecast>, t: Throwable) {
-                    println("FAILET IGJEN")
-                }
+            println("inni observer")
+            create_activity()
+            println("etter create")
 
-                override fun onResponse(
-                    call: retrofit2.Call<Oceanforecast>,
-                    response: retrofit2.Response<Oceanforecast>
-                ) {
-                    if (response.isSuccessful) { //
-                        data = response.body()
-                        //lag startsiden når du åpner opp
-                         create_activity()
+            create_scrollView()
 
-                        //setter igjang scrollviewt
-                        create_scrollView()
-                    }
-                }
-            })
+
+        })
+
+        viewModel.setCustomValue(latitude, longitude)
+
 
     }
+
+
  fun create_activity(){
 
      icepresence  = findViewById(R.id.icepresence)
@@ -92,7 +85,7 @@ class OceanActivity : AppCompatActivity() {
      seacurrentdirection = findViewById(R.id.seacurrentdir)
      totalwavedirection = findViewById(R.id.totwavedir)
      waveheight = findViewById(R.id.waveheight)
-     time = findViewById(R.id.klokkelsett)
+     //time = findViewById(R.id.time)
      date = findViewById(R.id.date)
      arrow = findViewById(R.id.arrow)
      mapbutton = findViewById(R.id.mapbutton)
@@ -191,7 +184,6 @@ class OceanActivity : AppCompatActivity() {
         //legge klokkeslett for knappene
         set_scrollView(liste)
 
-
         //gjøre dem clickbare for å få info
 
         for (item in liste) {
@@ -249,10 +241,7 @@ class OceanActivity : AppCompatActivity() {
 
                 return info
 
-                //val tid =  data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxValidTime?.gmlTimePeriod?.gmlBegin
-                //val tiden = tid!!.split("T" ,":")
-                //time.text = "KL: " + tiden[1]
-            }
+}
 
             fun show_ocean_info(button: Show_ocean_info) {
                 icepresence.text = button.icepresence

@@ -60,6 +60,7 @@ dependencies {
     implementation "androidx.preference:preference-ktx:1.1.0"
     implementation 'com.carto:carto-mobile-sdk:4.2.2@aar'
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:9.1.0'
+    implementation 'com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.8.0'
 
     //fuel
     implementation 'com.github.kittinunf.fuel:fuel:2.2.0'
