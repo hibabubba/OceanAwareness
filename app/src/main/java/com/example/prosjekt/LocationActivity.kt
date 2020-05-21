@@ -1,39 +1,32 @@
 package com.example.prosjekt
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import com.example.prosjekt.Dataclasses.SetImage
 import androidx.appcompat.app.AppCompatDelegate
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import com.example.prosjekt.Show_info
 import com.example.prosjekt.Locationforecast.*
 import com.example.prosjekt.ViewModel.LocationActivityViewModel
-import kotlinx.android.synthetic.main.activity__location.*
 
 
 class LocationActivity : AppCompatActivity() {
 
     private var data: Locationforecast? = null
-    lateinit var hoved: TextView
-    lateinit var cloud: TextView
-    lateinit var fog: TextView
-    lateinit var humid: TextView
-    lateinit var windDir: TextView
-    lateinit var windSpeed: TextView
-    lateinit var precipitation: TextView
-    lateinit var date: TextView
-    lateinit var arrow: ImageButton
-    lateinit var mapbutton: ImageButton
-    lateinit var info: Show_info
+    private lateinit var hoved: TextView
+    private lateinit var cloud: TextView
+    private lateinit var fog: TextView
+    private lateinit var humid: TextView
+    private lateinit var windDir: TextView
+    private lateinit var windSpeed: TextView
+    private lateinit var precipitation: TextView
+    private lateinit var date: TextView
+    private lateinit var arrow: ImageButton
+    private lateinit var mapbutton: ImageButton
+    private lateinit var info: ShowInfo
     private val viewModel: LocationActivityViewModel = LocationActivityViewModel()
-    private var liste_med_info: ArrayList<Show_info> = ArrayList<Show_info>(50)
+    private var listeMedInfo: ArrayList<ShowInfo> = ArrayList<ShowInfo>(50)
     private var longitude = 0.toDouble()
     private var latitude = 0.toDouble()
 
@@ -47,37 +40,33 @@ class LocationActivity : AppCompatActivity() {
             setTheme(R.style.AppTheme)
         }
 
-        setContentView(R.layout.activity__location)
+        setContentView(R.layout.activity_location)
 
         latitude = intent.getDoubleExtra("lati", 2000.00)
 
         longitude = intent.getDoubleExtra("longi", 2000.00)
 
 
-        val liveData: LiveData<Locationforecast> = viewModel.getData()
+        val liveData : LiveData<Locationforecast> = viewModel.getData()
         liveData.observe(this, Observer<Locationforecast> { result ->
 
             data = result
             println(result)
 
             println("inni observer")
-            create_activity()
+            createActivity()
             println("etter create")
 
-            create_scrollview()
+            createScrollview()
+
 
 
         })
-
-
         viewModel.setCustomValue(latitude, longitude)
-
-        //CoroutineScope(Dispatchers.IO).launch {
-        //fetchJson()}
     }
 
 
-    fun create_activity() {//Første gang programmet kjører vises denne været for nå
+    private fun createActivity() {//Første gang programmet kjører vises denne været for nå
 
         //INFO
         hoved = findViewById(R.id.hovedtext)
@@ -126,7 +115,7 @@ class LocationActivity : AppCompatActivity() {
 
     }
 
-    fun create_scrollview() {
+    private fun createScrollview() {
         //hente alle 48 imagebuttonene
         val liste = listOf<ImageButton>(
             findViewById(R.id.id1),
@@ -232,27 +221,27 @@ class LocationActivity : AppCompatActivity() {
 
         //legge iconer for knappene + klokkeslett
         var teller = 0
-        var tellerregn = 1
+        var tellerRegn = 1
         for (nr in 0..47) {
-            val liste:List<Int> = set_dataImage_forcast(tellerregn, teller, nr, liste[nr], list[nr])
-            teller =liste[0]
-            tellerregn =liste[1]
+            val liste : List<Int> = setDataImageForcast(tellerRegn, teller, nr, liste[nr], list[nr])
+            teller = liste[0]
+            tellerRegn = liste[1]
         }
-        //gjøre dem clickbare for å få info
 
+        //gjøre dem clickbare for å få info
         for (item in liste) {
             item.setOnClickListener {
-                var plass = liste.indexOf(item)
-                show_info(liste_med_info.get(plass))
+                val plass = liste.indexOf(item)
+                showInfo(listeMedInfo[plass])
 
             }
         }
     }
 
-    fun get_info(plass: Int, plass2: Int): Show_info {
+    fun getInfo(plass : Int, plass2 : Int) : ShowInfo {
         val time = data?.product?.time?.get(plass)?.from
         val tid = time!!.split("T", ":")
-        info = Show_info(
+        info = ShowInfo(
             hoved = data?.product?.time?.get(plass)?.location?.temperature?.value + "°C",
             cloud = " Skyer \n" + data?.product?.time?.get(plass)?.location?.cloudiness?.percent + "%",
             fog = "Tåke \n" + data?.product?.time?.get(plass)?.location?.fog?.percent + "%",
@@ -270,7 +259,7 @@ class LocationActivity : AppCompatActivity() {
 
     }
 
-    fun show_info(button: Show_info) {
+    private fun showInfo(button : ShowInfo) {
         hoved.text = button.hoved
         cloud.text = button.cloud
         fog.text = button.fog
@@ -281,14 +270,14 @@ class LocationActivity : AppCompatActivity() {
         date.text = button.date
     }
 
-    fun set_dataImage_forcast(tellerregn: Int, teller: Int, nr: Int, liste: ImageButton, list: TextView): List<Int> {
+    private fun setDataImageForcast(tellerregn: Int, teller: Int, nr: Int, liste: ImageButton, list: TextView): List<Int> {
         //sette iconene
-        val resultat = viewModel.set_dataImage(tellerregn, teller, nr, data)
-        val bilde: Int = viewModel.set_image_logic(resultat)
+        val resultat = viewModel.setDataImage(tellerregn, teller, nr, data)
+        val bilde : Int = viewModel.setImageLogic(resultat)
         if (bilde != -1) {
-            set_image(liste, bilde)
-            //hente og legge til info i liste_med_info
-            liste_med_info.add(get_info(resultat.teller, tellerregn))
+            setImage(liste, bilde)
+            //hente og legge til info i listeMedInfo
+            listeMedInfo.add(getInfo(resultat.teller, tellerregn))
 
             //Legg til text klokkeslett
             //for(textview in list){
@@ -302,7 +291,7 @@ class LocationActivity : AppCompatActivity() {
 
     }
 
-    fun set_image(icon: ImageButton, bilde: Int) {
+    private fun setImage(icon : ImageButton, bilde : Int) {
         icon.setImageResource(bilde)
     }
 }

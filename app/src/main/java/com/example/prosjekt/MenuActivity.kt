@@ -2,36 +2,30 @@ package com.example.prosjekt
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.Toast
+import android.widget.*
 import androidx.activity.viewModels
-import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.prosjekt.RSS.ApiproxyserviceRSS
 import com.example.prosjekt.RSS.FeedAdapter
 import com.example.prosjekt.RSS.RSSObject
-import com.github.kittinunf.fuel.Fuel
-import com.github.kittinunf.fuel.coroutines.awaitString
-import com.google.gson.Gson
-import com.example.prosjekt.Repository.Repository
+import com.example.prosjekt.Repository.RSSRepository
 import com.example.prosjekt.ViewModel.MenuActivityViewModel
 import com.example.prosjekt.ViewModelFactory.MenuActivityViewModelFactory
-import kotlinx.coroutines.*
-import java.lang.StringBuilder
+import kotlinx.android.synthetic.main.activity_menu.*
 
 
 object Injection {
 
-    val repository: Repository by lazy { Repository() }
-    val viewModelFactory: MenuActivityViewModelFactory by lazy {
+    val repository : RSSRepository by lazy { RSSRepository() }
+    val viewModelFactory : MenuActivityViewModelFactory by lazy {
         MenuActivityViewModelFactory(repository)
     }
 }
@@ -72,7 +66,7 @@ class MenuActivity : AppCompatActivity() {
         println("HEI NÅ FUNKER DET BITCHESSS")
         println("activity, long: $long")
         println("activity, lat: $lat")
-        val repo = Repository()
+        //val repo = RSSRepository()
 
         /* val viewModel: MenuActivityViewModel =
             ViewModelProviders.of(this, Injection.viewModelFactory).get(MenuActivityViewModel::class.java)
@@ -98,15 +92,11 @@ class MenuActivity : AppCompatActivity() {
             } else {
                 ekstrem.visibility = View.VISIBLE
             }
-            /*}
-            CoroutineScope(Dispatchers.Main).launch{
-                setView(result)
-            }*/
-            // update UI
+
         })
 
 
-        viewModel.setCustomValue(lat, long)
+        viewModel.getFeedByCoordinates(lat, long)
 
         havaktivitetButton = findViewById(R.id.havaktivitetButton)
         vaervarselButton = findViewById(R.id.vaervarselButton)
@@ -159,7 +149,13 @@ class MenuActivity : AppCompatActivity() {
 
         }
 
+
+
+
+
     }
+
+
 
 
     fun getCoordinates() : Boolean {

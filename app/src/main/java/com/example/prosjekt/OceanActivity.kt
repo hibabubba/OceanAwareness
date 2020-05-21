@@ -7,14 +7,8 @@ import android.widget.*
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.appcompat.app.AppCompatDelegate
-import com.example.prosjekt.Locationforecast.Locationforecast
 import com.example.prosjekt.Oceanforecast.Oceanforecast
 import com.example.prosjekt.ViewModel.OceanActivityViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import okhttp3.Call
-import okhttp3.Callback
 
 class OceanActivity : AppCompatActivity() {
 
@@ -22,8 +16,8 @@ class OceanActivity : AppCompatActivity() {
     private var data: Oceanforecast? = null
 
     private val viewModel : OceanActivityViewModel = OceanActivityViewModel()
-    private var liste_med_info: ArrayList<Show_ocean_info> = ArrayList<Show_ocean_info>(50)
-    lateinit var info: Show_ocean_info
+    private var liste_med_info: ArrayList<ShowOceanInfo> = ArrayList<ShowOceanInfo>(50)
+    lateinit var info: ShowOceanInfo
 
     lateinit var icepresence : TextView
     lateinit var temp: TextView
@@ -48,7 +42,7 @@ class OceanActivity : AppCompatActivity() {
             setTheme(R.style.AppTheme)
         }
 
-        setContentView(R.layout.activity__ocean)
+        setContentView(R.layout.activity_ocean)
         latitude = intent.getDoubleExtra("lati", 2000.00)
 
         longitude  = intent.getDoubleExtra("longi", 2000.00)
@@ -205,11 +199,11 @@ class OceanActivity : AppCompatActivity() {
             liste_med_info.add(get_info(nr))
         }}
 
-            fun get_info(nr: Int): Show_ocean_info {
+            fun get_info(nr: Int): ShowOceanInfo {
                 val tid =
                     data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxValidTime?.gmlTimePeriod?.gmlBegin
                 val tiden = tid!!.split("T", ":")
-                info = Show_ocean_info(
+                info = ShowOceanInfo(
                     icepresence = "Icepresence \n       " +
                             data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxSeaIcePresence?.content + data?.moxForecast?.get(
                         nr
@@ -243,7 +237,7 @@ class OceanActivity : AppCompatActivity() {
 
 }
 
-            fun show_ocean_info(button: Show_ocean_info) {
+            fun show_ocean_info(button : ShowOceanInfo) {
                 icepresence.text = button.icepresence
                 temp.text = button.seatemp
                 seacurrentspeed.text = button.seacurrentspeed

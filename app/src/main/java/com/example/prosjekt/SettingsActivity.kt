@@ -17,8 +17,8 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var omRedningButton : androidx.appcompat.widget.AppCompatImageButton
     private lateinit var fullTextApp : TextView
     private lateinit var fullTextRedning : TextView
-    lateinit var arrow: ImageButton
-    private lateinit var mySwitch: Switch
+    private lateinit var arrow : ImageButton
+    //private lateinit var nattSwitch : Switch
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -30,9 +30,14 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        val nattSwitch : Switch = findViewById(R.id.nattSwitch)
+        //nattSwitch = findViewById<Switch>(R.id.nattSwitch)
+        omAppButton = findViewById(R.id.omAppButton)
+        omRedningButton = findViewById(R.id.omRedningButton)
+        fullTextApp = findViewById(R.id.omAppTextView)
+        fullTextRedning = findViewById(R.id.omRedningTextView)
+        arrow = findViewById(R.id.arrow)
 
-        nattSwitch.setOnCheckedChangeListener { _, isChecked ->
+        findViewById<Switch>(R.id.nattSwitch).setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 //setTheme(R.style.darktheme)
@@ -42,19 +47,13 @@ class SettingsActivity : AppCompatActivity() {
             }
         }
 
-        omAppButton = findViewById(R.id.omAppButton)
-        omRedningButton = findViewById(R.id.omRedningButton)
-        fullTextApp = findViewById(R.id.omAppTextView)
-        fullTextRedning = findViewById(R.id.omRedningTextView)
-        arrow = findViewById(R.id.arrow)
-
         omAppButton.setOnClickListener {
-            changeState(fullTextApp, omAppButton, currentfulltextApp, "app")
+            changeState("app")
             currentfulltextApp = true
         }
 
         omRedningButton.setOnClickListener{
-            changeState(fullTextRedning, omRedningButton, currentFulltextRedning, "redning")
+            changeState("redning")
             currentFulltextRedning = true
         }
 
@@ -65,10 +64,41 @@ class SettingsActivity : AppCompatActivity() {
 
     }
 
-    private fun changeState(fullText : TextView, button : ImageButton, currentState : Boolean, type : String) {
-        val fullTextAdapter = FulltextAdapter(fullText, button, currentState, type)
-        fullTextAdapter.changeState()
+    private fun changeState(type : String) {
+        if (type == "app") {
+            if (!currentfulltextApp) {
+                putTextApp()
+            } else {
+                hideText(type)
+            }
+        } else {
+            if (!currentFulltextRedning) {
+                putTextRedning()
+            } else {
+                hideText(type)
+            }
+        }
 
+    }
+
+    private fun hideText(type : String){
+        if(type == "app") {
+            fullTextApp.text = ""
+            omAppButton.setImageResource(R.drawable.ic_drop_down)
+        } else {
+            fullTextRedning.text = ""
+            omRedningButton.setImageResource(R.drawable.ic_drop_down)
+        }
+    }
+
+    private fun putTextRedning() {
+        fullTextRedning.text = "Denne appen er utviklet av blablabla"
+        omRedningButton.setImageResource(R.drawable.ic_drop_up)
+    }
+
+    private fun putTextApp(){
+        fullTextApp.text = "Denne appen er utviklet av blablabla"
+        omAppButton.setImageResource(R.drawable.ic_drop_up)
     }
 
 }

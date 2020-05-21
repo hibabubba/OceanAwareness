@@ -17,6 +17,8 @@
         />
 
 
+
+
     <LinearLayout
         android:background="?attr/buttoncolor"
         android:layout_width="match_parent"
@@ -103,6 +105,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:fontFamily="@font/barlowsemibold"
+        android:visibility="gone"
         />
 
     <androidx.recyclerview.widget.RecyclerView

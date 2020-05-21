@@ -5,20 +5,25 @@ import android.content.SharedPreferences
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Color.WHITE
+import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.preference.PreferenceManager
-import android.widget.TextView
 
 //import org.osmdroid.views.MapView;
 import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
-import android.widget.Button
-import android.widget.FrameLayout
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatImageButton
+import androidx.constraintlayout.widget.ConstraintLayout
+import com.example.prosjekt.Dataclasses.Results
 import com.example.prosjekt.R
+import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.coroutines.awaitString
+import com.google.gson.Gson
 import com.mapbox.geojson.Point
 import com.mapbox.geojson.Polygon
 import com.mapbox.mapboxsdk.Mapbox
@@ -27,13 +32,16 @@ import com.mapbox.mapboxsdk.camera.CameraUpdateFactory
 import com.mapbox.mapboxsdk.geometry.LatLng
 import com.mapbox.mapboxsdk.geometry.LatLngBounds
 import com.mapbox.mapboxsdk.maps.*
-import com.mapbox.mapboxsdk.plugins.annotation.FillOptions
+//import com.mapbox.mapboxsdk.plugins.annotation.FillOptions
 import com.mapbox.mapboxsdk.style.layers.FillLayer
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
 import com.mapbox.mapboxsdk.utils.ColorUtils.colorToRgbaString
 import kotlinx.android.synthetic.main.activity_main.view.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import java.util.ArrayList
 import okhttp3.internal.checkOffsetAndCount as checkOffsetAndCount1
 
@@ -46,9 +54,10 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
     private var sharedPreferences: SharedPreferences? = null
     private var longTextView: TextView? = null
     private var latTextView: TextView? = null
+    private lateinit var popupWindow : PopupWindow
 
     private lateinit var sjekkBtn : Button
-    private lateinit var settingsBtn : AppCompatImageButton
+    //private lateinit var settingsBtn : AppCompatImageButton
     private var savedLat: Double = 0.toDouble()
     private var savedLong: Double = 0.toDouble()
 
@@ -70,15 +79,11 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
         longTextView = findViewById(R.id.shared_pref_saved_long_textview)
         latTextView = findViewById(R.id.shared_pref_saved_lat_textview)
         sjekkBtn = findViewById(R.id.button)
-        settingsBtn = findViewById(R.id.settingsButton)
 
-
-        settingsBtn.setOnClickListener{
+        findViewById<AppCompatImageButton>(R.id.settingsButton).setOnClickListener{
             val intent = Intent(this, SettingsActivity::class.java)
             startActivity(intent)
         }
-
-
 
         map = this.findViewById(R.id.kart)
 
@@ -202,41 +207,70 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
     }
 
-        override fun onMapClick(mapClickPoint: LatLng): Boolean {
-            val clickLatitude = mapClickPoint.latitude
-            val clickLongitude = mapClickPoint.longitude
+    override fun onMapClick(mapClickPoint: LatLng): Boolean {
+        val clickLatitude = mapClickPoint.latitude
+        val clickLongitude = mapClickPoint.longitude
 
-            //Hente ut cliken og sette det i texten
-          longTextView!!.text = clickLongitude.toString()
-           latTextView!!.text = clickLatitude.toString()
+        val layout = findViewById<ConstraintLayout>(R.id.constraint)
+        onButtonShowPopupWindowClick(layout, clickLatitude, clickLongitude)
 
-
-            // Save the map click point coordinates to shared preferences
-            if (sharedPreferences != null) {
-                putCoordinateToSharedPref(MainActivity.SAVED_LAT_KEY, clickLatitude)
-                putCoordinateToSharedPref(MainActivity.SAVED_LONG_KEY, clickLongitude)
-
-
+        /*
+        CoroutineScope(Dispatchers.IO).launch {
+            findLocation(clickLatitude, clickLongitude)
+            withContext(Main) {
+                val layout = findViewById<ConstraintLayout>(R.id.constraint)
+                onButtonShowPopupWindowClick(layout)
             }
-
-            //viser frem knappene når vi får koordinater, sjekk at de kommer bare når koordinatene gir mening
-            sjekkBtn.visibility = View.VISIBLE
-
-
-            //får hver click på en knapp gå inn i en ny activity
-            sjekkBtn.setOnClickListener{
-                val intent = Intent(this, MenuActivity::class.java)
-                //ta med meg koordinatene
-                intent.putExtra("lati", getCoordinateFromSharedPref(SAVED_LAT_KEY))
-                intent.putExtra("longi", getCoordinateFromSharedPref(SAVED_LONG_KEY))
-                startActivity(intent)
-            }
-
-
-            // Move the marker to the newly-saved coordinates
-            moveMarkerToLngLat(clickLongitude, clickLatitude )
-            return true
         }
+
+        val xy = Point.fromLngLat(clickLongitude, clickLatitude)
+        println(xy)*/
+
+
+
+
+
+
+        /*val sjekkButton = popupView.findViewById<Button>(R.id.sjekkButton)
+        sjekkButton.setOnClickListener {
+            val intent = Intent(this, MenuActivity::class.java)
+            //ta med meg koordinatene
+            intent.putExtra("lati", getCoordinateFromSharedPref(SAVED_LAT_KEY))
+            intent.putExtra("longi", getCoordinateFromSharedPref(SAVED_LONG_KEY))
+            startActivity(intent)
+        }*/
+
+        //Hente ut cliken og sette det i texten
+        longTextView!!.text = clickLongitude.toString()
+        latTextView!!.text = clickLatitude.toString()
+
+
+        //Save the map click point coordinates to shared preferences
+        if (sharedPreferences != null) {
+            putCoordinateToSharedPref(MainActivity.SAVED_LAT_KEY, clickLatitude)
+            putCoordinateToSharedPref(MainActivity.SAVED_LONG_KEY, clickLongitude)
+
+
+        }
+/*
+        //viser frem knappene når vi får koordinater, sjekk at de kommer bare når koordinatene gir mening
+        sjekkBtn.visibility = View.VISIBLE
+
+
+        //får hver click på en knapp gå inn i en ny activity
+        sjekkBtn.setOnClickListener{
+            val intent = Intent(this, MenuActivity::class.java)
+            //ta med meg koordinatene
+            intent.putExtra("lati", getCoordinateFromSharedPref(SAVED_LAT_KEY))
+            intent.putExtra("longi", getCoordinateFromSharedPref(SAVED_LONG_KEY))
+            startActivity(intent)
+        }*/
+
+
+        // Move the marker to the newly-saved coordinates
+        moveMarkerToLngLat(clickLongitude, clickLatitude )
+        return true
+    }
 
         /**
          * Move the SymbolLayer icon to a new location
@@ -244,17 +278,17 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
          * @param newLong the new longitude
          * @param newLat  the new latitude
         */
-        private fun moveMarkerToLngLat(newLong: Double, newLat: Double) {
-            // Move and display the click center layer's red marker icon to
-            // wherever the map was clicked on
-            mapboxMap!!.getStyle { style ->
-                val clickLocationSource = style.getSourceAs<GeoJsonSource>(MainActivity.CLICK_LOCATION_SOURCE_ID)
-                clickLocationSource?.setGeoJson(Point.fromLngLat(newLong, newLat))
-
-            }
-
+    private fun moveMarkerToLngLat(newLong: Double, newLat: Double) {
+        // Move and display the click center layer's red marker icon to
+        // wherever the map was clicked on
+        mapboxMap!!.getStyle { style ->
+            val clickLocationSource = style.getSourceAs<GeoJsonSource>(MainActivity.CLICK_LOCATION_SOURCE_ID)
+            clickLocationSource?.setGeoJson(Point.fromLngLat(newLong, newLat))
 
         }
+
+
+    }
 
         /**
          * Save a specific number to shared preferences
@@ -262,19 +296,19 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
          * @param key   the number's key
          * @param value the actual number
          */
-        private fun putCoordinateToSharedPref(key: String, value: Double) {
-            sharedPreferences!!.edit().putLong(key, java.lang.Double.doubleToRawLongBits(value)).apply()
-        }
+    private fun putCoordinateToSharedPref(key: String, value: Double) {
+        sharedPreferences!!.edit().putLong(key, java.lang.Double.doubleToRawLongBits(value)).apply()
+    }
 
-        /**
-         * Retrieve a specific number from shared preferences
-         *
-         * @param key the key to use for retrieval
-         * @return the saved number
-         */
-        internal fun getCoordinateFromSharedPref(key: String): Double {
-            return java.lang.Double.longBitsToDouble(sharedPreferences!!.getLong(key, 0))
-        }
+    /**
+     * Retrieve a specific number from shared preferences
+     *
+     * @param key the key to use for retrieval
+     * @return the saved number
+     */
+    internal fun getCoordinateFromSharedPref(key: String): Double {
+        return java.lang.Double.longBitsToDouble(sharedPreferences!!.getLong(key, 0))
+    }
 
 
     /*** Add a FillLayer to show the boundary area
@@ -374,6 +408,44 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
         super.onDestroy()
         map?.onDestroy()
     }
+
+    private fun onButtonShowPopupWindowClick (view : View, lat : Double, long : Double) {
+
+        // inflate the layout of the popup window
+        val inflater : LayoutInflater = LayoutInflater.from(this)
+        getSystemService(LAYOUT_INFLATER_SERVICE)
+        val popupView = inflater.inflate(R.layout.popup, null)
+
+        // create the popup window
+        val width = LinearLayout.LayoutParams.WRAP_CONTENT
+        val height = LinearLayout.LayoutParams.WRAP_CONTENT
+        val focusable = true // lets taps outside the popup also dismiss it
+        popupWindow =  PopupWindow(popupView, width, height, focusable)
+
+        popupView.findViewById<TextView>(R.id.latTxt).text = "%.6f".format(lat)
+        popupView.findViewById<TextView>(R.id.longTxt).text = "%.6f".format(long)
+
+        popupView.findViewById<Button>(R.id.sjekkButton).setOnClickListener {
+            val intent = Intent(this, MenuActivity::class.java)
+            //ta med meg koordinatene
+            intent.putExtra("lati", getCoordinateFromSharedPref(SAVED_LAT_KEY))
+            intent.putExtra("longi", getCoordinateFromSharedPref(SAVED_LONG_KEY))
+            startActivity(intent)
+        }
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
+
+    }
+
+    /*
+    private suspend fun findLocation(lat : Double, long : Double) {
+        val geoCoder = Geocoder(this)
+
+        CoroutineScope(IO).launch {
+            geoCoder.getFromLocation(lat, long, 5)
+        }
+
+    }*/
 
     companion object {
         private val SAVED_LAT_KEY = "SAVED_LAT_KEY"
