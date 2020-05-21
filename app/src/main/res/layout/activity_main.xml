@@ -37,13 +37,25 @@
       android:layout_width="50dp"
       android:layout_height="50dp"
       android:background="@null"
+      android:padding="5dp"
       android:src="@drawable/ic_settings"
       mapbox:layout_constraintStart_toStartOf="parent"
-      mapbox:layout_constraintTop_toTopOf="parent"
-      android:padding="5dp"/>
+      mapbox:layout_constraintTop_toTopOf="parent" />
+
+  <!--<ImageView
+      android:id="@+id/imageView"
+      android:layout_width="wrap_content"
+      android:layout_height="150dp"
+      android:padding="5dp"
+      android:background="@drawable/oceanlogo"
+      mapbox:layout_constraintStart_toStartOf="parent"
+      mapbox:layout_constraintTop_toTopOf="parent" />
+      -->
+
 
   <TextView
       android:id="@+id/shared_pref_saved_lat_textview"
+      android:textColor="?attr/textcolor"
       android:layout_width="328dp"
       android:layout_height="21dp"
       android:layout_marginStart="32dp"
@@ -53,6 +65,7 @@
 
   <TextView
       android:id="@+id/shared_pref_saved_long_textview"
+      android:textColor="?attr/textcolor"
       android:layout_width="317dp"
       android:layout_height="21dp"
       android:layout_marginStart="44dp"
@@ -61,6 +74,7 @@
 
   <Button
       android:id="@+id/button"
+      android:textColor="?attr/textcolor"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginEnd="1dp"
@@ -70,9 +84,6 @@
       mapbox:layout_constraintStart_toStartOf="parent"
       mapbox:layout_constraintTop_toTopOf="parent"
       mapbox:layout_constraintVertical_bias="0.986" />
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

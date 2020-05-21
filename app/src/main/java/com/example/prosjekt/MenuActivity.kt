@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.Nullable
@@ -11,15 +12,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.prosjekt.RSS.ApiproxyserviceRSS
 import com.example.prosjekt.RSS.FeedAdapter
 import com.example.prosjekt.RSS.RSSObject
+import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.coroutines.awaitString
+import com.google.gson.Gson
 import com.example.prosjekt.Repository.Repository
 import com.example.prosjekt.ViewModel.MenuActivityViewModel
 import com.example.prosjekt.ViewModelFactory.MenuActivityViewModelFactory
 import kotlinx.coroutines.*
+import java.lang.StringBuilder
 
 
 object Injection {
@@ -35,6 +41,7 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var havaktivitetButton: Button
     private lateinit var vaervarselButton: Button
     private lateinit var rssRecyclerview: RecyclerView
+    lateinit var arrow: ImageButton
 
 
     //koordinater
@@ -46,11 +53,17 @@ class MenuActivity : AppCompatActivity() {
     //private lateinit var data : RSSObject
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        //Sjekker om darkmode er på
+        if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.darktheme)
+        } else {
+            setTheme(R.style.AppTheme)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
-
-
 
 
         lat = intent.getDoubleExtra("lati", 2000.00)
@@ -95,18 +108,29 @@ class MenuActivity : AppCompatActivity() {
 
         viewModel.setCustomValue(lat, long)
 
-
-
-
-
         havaktivitetButton = findViewById(R.id.havaktivitetButton)
         vaervarselButton = findViewById(R.id.vaervarselButton)
         rssRecyclerview = findViewById(R.id.rssRecyclerView)
+        arrow = findViewById(R.id.arrow)
         val linearLayoutManager =
             LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL, false)
         rssRecyclerview.layoutManager = linearLayoutManager
 
 
+        arrow.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            //intent.putExtra("lati", latitude)
+           // intent.putExtra("longi", longitude)
+            startActivity(intent)
+        }
+
+
+
+        /*if (getCoordinates()) {
+            getFeed(buildUrl())
+        } else {
+            Toast.makeText(this, "Funket ikke", Toast.LENGTH_LONG).show()
+        }*/
 
 
 
@@ -136,7 +160,21 @@ class MenuActivity : AppCompatActivity() {
         }
 
     }
-}
+
+
+    fun getCoordinates() : Boolean {
+        //val bundle:Bundle? = intent.extras
+        lat = intent.getDoubleExtra("lati", 2000.00)
+        long = intent.getDoubleExtra("longi", 2000.00)
+
+        if (lat != 2000.00 && long != 2000.00) {
+            Toast.makeText(this, "Hentet koordinater", Toast.LENGTH_LONG).show()
+            return true
+        }
+
+        Toast.makeText(this, "Kooridnater ikke funnet", Toast.LENGTH_LONG).show()
+        return false
+    }
 
     /*
     private suspend fun setView(result: RSSObject) {
@@ -155,12 +193,14 @@ class MenuActivity : AppCompatActivity() {
                 val ekstrem = findViewById<View>(R.id.ekstremTextView)
                 ekstrem.visibility = View.GONE
 
+            }
         }
+
 
     }
 
 
-/*
+
 
 
     fun buildUrl()  : String {
@@ -190,9 +230,17 @@ class MenuActivity : AppCompatActivity() {
 
             }
         }
-    }
+    }*/
 
     //Bruker feed-adapter til å sette recyclerview
+   /* private fun setView(result: RSSObject) {
+        val adapter = FeedAdapter(result,baseContext)
+        rssRecyclerview.adapter = adapter
+        adapter.notifyDataSetChanged()
+
+        if (adapter.itemCount == 0) {
+            val ekstrem = findViewById<View>(R.id.ekstremTextView)
+            ekstrem.visibility = View.GONE*/
 
 
 /*
@@ -205,4 +253,3 @@ class MenuActivity : AppCompatActivity() {
 
 }
 
-*/

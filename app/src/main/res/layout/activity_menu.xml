@@ -1,80 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundcolor">
+
+    <ImageButton
+        android:id="@+id/arrow"
+        android:contentDescription="@string/tilbakeknapp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/arrow"
+        />
+
 
     <LinearLayout
+        android:background="?attr/buttoncolor"
         android:layout_width="match_parent"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp"
-        android:elevation="20dp">
+        android:layout_marginTop="10dp"
+        android:elevation="20dp"
+        android:padding="10dp">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ic_ocean"
+            android:background="@null"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:id="@+id/ic_ocean"
             android:layout_marginStart="10dp"
-            android:src="@drawable/ic_ocean"/>
+            android:scaleType="fitXY"
+            android:src="@drawable/bolgeretning2" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="0dp"
             android:id="@+id/havaktivitetButton"
+            android:textColor="?attr/textcolor"
             android:background="@null"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:paddingStart="20dp"
             android:paddingEnd="0dp"
             android:text="@string/havaktivitet"
-            android:textSize="30sp" />
-
+            android:fontFamily="@font/barlowsemibold"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeMaxTextSize="50sp"
+            app:autoSizeStepGranularity="5sp"/>
 
 
     </LinearLayout>
 
-
     <LinearLayout
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="20dp"
-        android:elevation="20dp">
+        android:elevation="20dp"
+        android:padding="10dp"
+        android:background="?attr/buttoncolor">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ic_sun"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginStart="10dp"
-            android:src="@drawable/ic_weather" />
+            android:scaleType="fitXY"
+            android:src="@drawable/sol" />
 
         <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:textColor="?attr/textcolor"
+            android:backgroundTint="?attr/buttontint"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:id="@+id/vaervarselButton"
             android:background="@null"
             android:paddingStart="20dp"
             android:paddingEnd="0dp"
             android:text="@string/v_rvarsel"
-            android:textSize="30sp"
-            android:elevation="0dp"/>
+            android:elevation="0dp"
+            android:fontFamily="@font/barlowsemibold"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeMaxTextSize="50sp"
+            app:autoSizeStepGranularity="2sp"/>
 
 
     </LinearLayout>
 
     <TextView
+        android:textColor="?attr/textcolor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ekstremTextView"
         android:paddingTop="20dp"
         android:text="@string/ekstremv_rvarsel"
         android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:fontFamily="@font/barlowsemibold"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:textColor="?attr/textcolor"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_weight="20"
+        android:layout_height="0dp"
         android:padding="8dp"
-        android:id="@+id/rssRecyclerView"/>
+        android:id="@+id/rssRecyclerView"
+        android:fontFamily="@font/barlowmedium"/>
 
 </LinearLayout>

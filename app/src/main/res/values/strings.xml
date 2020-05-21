@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Prosjekt</string>
+    <string name="app_name">Ocean Awarness</string>
     <string name="mapbox_access_token">pk.eyJ1IjoiaGliYWJlIiwiYSI6ImNrOHVkcWQ5eDAxZWIzanFxbHpxZzhxbXcifQ.5LZQ6tZnTbUXugtbSTRG7A</string>
+    <string name="skjermbakgrunn">Skjermbakgrunn</string>
+    <string name="tilbakeknapp">tilbakeknapp</string>
     <string name="nattmodus">Nattmodus</string>
     <string name="om_appen">Om appen</string>
     <string name="om_redningstjenesten">Om redningstjenesten</string>
@@ -15,4 +17,22 @@
     <string name="v_rvarsel">Værvarsel</string>
     <string name="b_lgevarsel">Bølgevarsel</string>
     <string name="ekstremv_r">ekstremvær</string>
+    <string name="sky_icon">Skyer</string>
+    <string name="taake_icon">Tåke</string>
+    <string name="fukt_icon">Luftfuktighet</string>
+    <string name="vindretning_icon">Vindretning</string>
+    <string name="vindstyrke_icon">Vindstyrke</string>
+    <string name="regn_icon">Nedbør</string>
+    <string name="kart_knapp">kart knapp</string>
+    <string name="havtempratur">havtempratur</string>
+    <string name="bolgehoyde_icon">bolgehoyde icon</string>
+    <string name="stromretning_icon">stromretning icon</string>
+    <string name="icepresence_icon">icepresence icon</string>
+    <string name="stromfart_icon">stromfart icon</string>
+    <string name="bolgeretning_icon">bolgeretning icon</string>
+    <string name="klokkeslett">Klokkeslett</string>
+    <string name="koordinater">Koordinater:</string>
+    <string name="dato">Dato:</string>
+    <string name="kompass">Kompass</string>
+    <string name="knapp">knapp</string>
 </resources>
