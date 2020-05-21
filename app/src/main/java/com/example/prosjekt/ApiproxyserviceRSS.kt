@@ -19,7 +19,6 @@ public interface ApiproxyserviceRSS {
     @GET("api.json?rss_url=https://in2000-apiproxy.ifi.uio.no/weatherapi/metalerts/1.1/")
     //https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fin2000-apiproxy.ifi.uio.no%2Fweatherapi%2Fmetalerts%2F1.1%2F%3Flat%3D10.09899%26lon%3D30.970696
     fun getRSSfeedAsync(
-        //@Query("rss_url") Link : String,
         @Query("lat") Latitude: Double,
         @Query("lon") Longitude: Double
     ): Deferred<RSSObject>
@@ -37,6 +36,8 @@ public interface ApiproxyserviceRSS {
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build()
+
+          //  println("API : " + retro)
 
             return retro.create(ApiproxyserviceRSS::class.java)
         }

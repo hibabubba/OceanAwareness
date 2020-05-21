@@ -6,16 +6,17 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.prosjekt.RSS.ApiproxyserviceRSS
 import com.example.prosjekt.RSS.FeedAdapter
 import com.example.prosjekt.RSS.RSSObject
 import com.example.prosjekt.Repository.Repository
-import com.example.prosjekt.Service.Service
 import com.example.prosjekt.ViewModel.MenuActivityViewModel
 import com.example.prosjekt.ViewModelFactory.MenuActivityViewModelFactory
 import kotlinx.coroutines.*
@@ -31,9 +32,10 @@ object Injection {
 
 class MenuActivity : AppCompatActivity() {
     //Widgets
-    private lateinit var havaktivitetButton : Button
-    private lateinit var vaervarselButton : Button
-    private lateinit var rssRecyclerview : RecyclerView
+    private lateinit var havaktivitetButton: Button
+    private lateinit var vaervarselButton: Button
+    private lateinit var rssRecyclerview: RecyclerView
+
 
     //koordinater
     private var lat = 0.toDouble()
@@ -44,10 +46,12 @@ class MenuActivity : AppCompatActivity() {
     //private lateinit var data : RSSObject
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+
+
+
 
         lat = intent.getDoubleExtra("lati", 2000.00)
         long = intent.getDoubleExtra("longi", 2000.00)
@@ -55,8 +59,9 @@ class MenuActivity : AppCompatActivity() {
         println("HEI NÅ FUNKER DET BITCHESSS")
         println("activity, long: $long")
         println("activity, lat: $lat")
+        val repo = Repository()
 
-       /* val viewModel: MenuActivityViewModel =
+        /* val viewModel: MenuActivityViewModel =
             ViewModelProviders.of(this, Injection.viewModelFactory).get(MenuActivityViewModel::class.java)
 */
         val viewModel: MenuActivityViewModel by viewModels {
@@ -67,7 +72,7 @@ class MenuActivity : AppCompatActivity() {
         liveData.observe(this, Observer<RSSObject> { result ->
             println("inni observer")
 
-            val adapter = FeedAdapter(result,baseContext)
+            val adapter = FeedAdapter(result, baseContext)
             //val antall = adapter.itemCount
             //println(antall)
 
@@ -84,21 +89,29 @@ class MenuActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch{
                 setView(result)
             }*/
-             // update UI
+            // update UI
         })
 
 
         viewModel.setCustomValue(lat, long)
 
+
+
+
+
         havaktivitetButton = findViewById(R.id.havaktivitetButton)
         vaervarselButton = findViewById(R.id.vaervarselButton)
         rssRecyclerview = findViewById(R.id.rssRecyclerView)
-        val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL, false)
+        val linearLayoutManager =
+            LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL, false)
         rssRecyclerview.layoutManager = linearLayoutManager
 
 
+
+
+
         havaktivitetButton.setOnClickListener {
-            if(lat != 2000.00 && long != 2000.00) {
+            if (lat != 2000.00 && long != 2000.00) {
                 val intent = Intent(this, OceanActivity::class.java)
                 //ta med meg koordinatene
                 intent.putExtra("lati", lat)
@@ -110,7 +123,7 @@ class MenuActivity : AppCompatActivity() {
         }
 
         vaervarselButton.setOnClickListener {
-            if(lat != 2000.00 && long != 2000.00) {
+            if (lat != 2000.00 && long != 2000.00) {
                 val intent = Intent(this, LocationActivity::class.java)
                 //ta med meg koordinatene
                 intent.putExtra("lati", lat)
@@ -123,6 +136,7 @@ class MenuActivity : AppCompatActivity() {
         }
 
     }
+}
 
     /*
     private suspend fun setView(result: RSSObject) {
@@ -141,14 +155,12 @@ class MenuActivity : AppCompatActivity() {
                 val ekstrem = findViewById<View>(R.id.ekstremTextView)
                 ekstrem.visibility = View.GONE
 
-            }
         }
-
 
     }
 
 
-
+/*
 
 
     fun buildUrl()  : String {
@@ -178,7 +190,7 @@ class MenuActivity : AppCompatActivity() {
 
             }
         }
-    }*/
+    }
 
     //Bruker feed-adapter til å sette recyclerview
 
@@ -193,3 +205,4 @@ class MenuActivity : AppCompatActivity() {
 
 }
 
+*/

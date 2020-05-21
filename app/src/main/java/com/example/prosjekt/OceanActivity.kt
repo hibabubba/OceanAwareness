@@ -3,10 +3,7 @@ package com.example.prosjekt
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.SeekBar
-import android.widget.TextView
+import android.widget.*
 import com.example.prosjekt.Locationforecast.Locationforecast
 import com.example.prosjekt.Oceanforecast.Oceanforecast
 import kotlinx.coroutines.CoroutineScope
@@ -59,7 +56,6 @@ class OceanActivity : AppCompatActivity() {
             bakgrunn.setScaleType(ImageView.ScaleType.FIT_XY)
 
 
-
         var call = apiService.getOceanforecast(latitude, longitude)
             call.enqueue(object : retrofit2.Callback<Oceanforecast> {
                 override fun onFailure(call: retrofit2.Call<Oceanforecast>, t: Throwable) {
@@ -75,8 +71,8 @@ class OceanActivity : AppCompatActivity() {
                         //lag startsiden når du åpner opp
                          create_activity()
 
-                        //setter igjang seekbaren
-                        set_seekbar()
+                        //setter igjang scrollviewt
+                        create_scrollview()
                     }
                 }
             })
@@ -129,23 +125,39 @@ class OceanActivity : AppCompatActivity() {
      }
 
  }
+    fun create_scrollview(){
+        //hente alle 48 buttonene
+        var liste =  listOf<Button>(findViewById(R.id.id1), findViewById(R.id.id2), findViewById(R.id.id3), findViewById(R.id.id4), findViewById(R.id.id5),
+            findViewById(R.id.id6), findViewById(R.id.id7), findViewById(R.id.id8),findViewById(R.id.id9),findViewById(R.id.id10), findViewById(R.id.id11),
+            findViewById(R.id.id12), findViewById(R.id.id13), findViewById(R.id.id14), findViewById(R.id.id15), findViewById(R.id.id16), findViewById(R.id.id17),
+            findViewById(R.id.id18), findViewById(R.id.id19), findViewById(R.id.id20), findViewById(R.id.id21), findViewById(R.id.id22) , findViewById(R.id.id23),
+            findViewById(R.id.id24),findViewById(R.id.id25), findViewById(R.id.id26),findViewById(R.id.id27), findViewById(R.id.id28), findViewById(R.id.id29),
+            findViewById(R.id.id30),findViewById(R.id.id31),findViewById(R.id.id32), findViewById(R.id.id33), findViewById(R.id.id34) , findViewById(R.id.id35),
+            findViewById(R.id.id36), findViewById(R.id.id37),findViewById(R.id.id38), findViewById(R.id.id39), findViewById(R.id.id40), findViewById(R.id.id41),
+            findViewById(R.id.id42), findViewById(R.id.id43), findViewById(R.id.id44), findViewById(R.id.id45),findViewById(R.id.id46) , findViewById(R.id.id47),
+            findViewById(R.id.id48))
+        //legge iconer for knappene + klokkeslett
+        set_scrollView(liste)
 
- fun set_seekbar(){
+        //gjøre dem clickbare for å få info
 
+        for(item in liste){
+            item.setOnClickListener {
+                var plass = liste.indexOf(item)
+                get_info(plass)
 
-         this.slider.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
-             override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
-                    get_info(progress)
-             }
-
-             override fun onStartTrackingTouch(seekBar: SeekBar) {
-             }
-
-             override fun onStopTrackingTouch(seekBar: SeekBar) {
-             }
-         })
+            }
+        }
+    }
+ fun set_scrollView(liste: List<Button>){
+    for(nr in 0..47){
+        val tid =  data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxValidTime?.gmlTimePeriod?.gmlBegin
+        val tiden = tid!!.split("T" ,":")
+        liste[nr].text=  tiden[1].toString()
+    }
 
  }
+
 
 
 fun get_info( nr:Int) {
@@ -167,9 +179,7 @@ fun get_info( nr:Int) {
     seacurrentspeed.text = " Havstrømfart: \n" +
             data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxSeaCurrentSpeed?.content + data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxSeaCurrentSpeed?.uom
 
-    val tid =  data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxValidTime?.gmlTimePeriod?.gmlBegin
-    val tiden = tid!!.split("T" ,":")
-    time.text = "KL: " + tiden[1]
+
 }
 
 

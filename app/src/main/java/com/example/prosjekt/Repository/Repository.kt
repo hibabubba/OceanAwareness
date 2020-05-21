@@ -8,7 +8,6 @@ import com.example.prosjekt.Locationforecast.Locationforecast
 import com.example.prosjekt.Oceanforecast.Oceanforecast
 import com.example.prosjekt.RSS.ApiproxyserviceRSS
 import com.example.prosjekt.RSS.RSSObject
-import com.example.prosjekt.Service.Service
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.FuelError
 import com.github.kittinunf.fuel.coroutines.awaitString

@@ -343,7 +343,7 @@
             <LinearLayout
                 android:id="@+id/andre"
                 android:layout_width="89dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <ImageView
@@ -362,13 +362,20 @@
                     android:layout_marginTop="50dp"
                     app:srcCompat="@drawable/vindstyrke" />
 
+                <ImageView
+                    android:id="@+id/percipitation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20sp"
+                    app:srcCompat="@drawable/ic_drop_up" />
+
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/andretext"
                 android:layout_width="110dp"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <TextView
@@ -386,6 +393,13 @@
                     android:layout_marginStart="0dp"
                     android:layout_marginTop="40dp"
                     android:text="windspeed" />
+
+                <TextView
+                    android:id="@+id/Percipitation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50sp"
+                    android:text="Percipitation" />
 
 
             </LinearLayout>
