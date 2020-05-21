@@ -1,100 +1,87 @@
 package com.example.prosjekt
 
 import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.prosjekt.RSS.ApiproxyserviceRSS
 import com.example.prosjekt.RSS.FeedAdapter
 import com.example.prosjekt.RSS.RSSObject
-import com.example.prosjekt.Repository.Repository
-import com.example.prosjekt.Service.Service
-import com.example.prosjekt.ViewModel.MenuActivityViewModel
-import com.example.prosjekt.ViewModelFactory.MenuActivityViewModelFactory
+import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.coroutines.awaitString
+import com.google.gson.Gson
 import kotlinx.coroutines.*
-
-
-object Injection {
-
-    val repository: Repository by lazy { Repository() }
-    val viewModelFactory: MenuActivityViewModelFactory by lazy {
-        MenuActivityViewModelFactory(repository)
-    }
-}
+import java.lang.StringBuilder
 
 class MenuActivity : AppCompatActivity() {
     //Widgets
     private lateinit var havaktivitetButton : Button
     private lateinit var vaervarselButton : Button
     private lateinit var rssRecyclerview : RecyclerView
+    lateinit var arrow: ImageButton
+
 
     //koordinater
     private var lat = 0.toDouble()
     private var long = 0.toDouble()
 
-
-    // private val  apiService = ApiproxyserviceRSS.create()
-    //private lateinit var data : RSSObject
+    //
+    //private val  apiService = ApiproxyserviceRSS.create()
+    private lateinit var data : RSSObject
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //Sjekker om darkmode er på
+        if(AppCompatDelegate.getDefaultNightMode()== AppCompatDelegate.MODE_NIGHT_YES){
+            setTheme(R.style.darktheme)
+        } else {
+            setTheme(R.style.AppTheme)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
 
-        lat = intent.getDoubleExtra("lati", 2000.00)
-        long = intent.getDoubleExtra("longi", 2000.00)
 
-        println("HEI NÅ FUNKER DET BITCHESSS")
-        println("activity, long: $long")
-        println("activity, lat: $lat")
-
-       /* val viewModel: MenuActivityViewModel =
-            ViewModelProviders.of(this, Injection.viewModelFactory).get(MenuActivityViewModel::class.java)
-*/
-        val viewModel: MenuActivityViewModel by viewModels {
-            Injection.viewModelFactory
-        }
-
-        val liveData: LiveData<RSSObject> = viewModel.getData()
-        liveData.observe(this, Observer<RSSObject> { result ->
-            println("inni observer")
-
-            val adapter = FeedAdapter(result,baseContext)
-            //val antall = adapter.itemCount
-            //println(antall)
-
-            rssRecyclerview.adapter = adapter
-            adapter.notifyDataSetChanged()
-
-            val ekstrem = findViewById<View>(R.id.ekstremTextView)
-            if (adapter.itemCount == 0) {
-                ekstrem.visibility = View.GONE
-            } else {
-                ekstrem.visibility = View.VISIBLE
-            }
-            /*}
-            CoroutineScope(Dispatchers.Main).launch{
-                setView(result)
-            }*/
-             // update UI
-        })
-
-
-        viewModel.setCustomValue(lat, long)
 
         havaktivitetButton = findViewById(R.id.havaktivitetButton)
         vaervarselButton = findViewById(R.id.vaervarselButton)
         rssRecyclerview = findViewById(R.id.rssRecyclerView)
+        arrow = findViewById(R.id.arrow)
+
+        arrow.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            //intent.putExtra("lati", latitude)
+           // intent.putExtra("longi", longitude)
+            startActivity(intent)
+        }
+
         val linearLayoutManager = LinearLayoutManager(baseContext, LinearLayoutManager.VERTICAL, false)
         rssRecyclerview.layoutManager = linearLayoutManager
+
+        /*
+        CoroutineScope(Dispatchers.IO).launch {
+            if (fetchJson()) {
+                withContext(Dispatchers.Main) {
+                    setView(data)
+
+                }
+            }
+        }*/
+
+
+        if (getCoordinates()) {
+            getFeed(buildUrl())
+        } else {
+            Toast.makeText(this, "Funket ikke", Toast.LENGTH_LONG).show()
+        }
+
 
 
         havaktivitetButton.setOnClickListener {
@@ -124,32 +111,56 @@ class MenuActivity : AppCompatActivity() {
 
     }
 
-    /*
-    private suspend fun setView(result: RSSObject) {
-        println("setview")
 
-        withContext(Dispatchers.Main) {
-            val adapter = FeedAdapter(result,baseContext)
-            val antall = adapter.itemCount
-            println(antall)
+    fun getCoordinates() : Boolean {
+        //val bundle:Bundle? = intent.extras
+        lat = intent.getDoubleExtra("lati", 2000.00)
+        long = intent.getDoubleExtra("longi", 2000.00)
 
-
-            rssRecyclerview.adapter = adapter
-            adapter.notifyDataSetChanged()
-
-            if (adapter.itemCount == 0) {
-                val ekstrem = findViewById<View>(R.id.ekstremTextView)
-                ekstrem.visibility = View.GONE
-
-            }
+        if (lat != 2000.00 && long != 2000.00) {
+            Toast.makeText(this, "Hentet koordinater", Toast.LENGTH_LONG).show()
+            return true
         }
 
-
+        Toast.makeText(this, "Kooridnater ikke funnet", Toast.LENGTH_LONG).show()
+        return false
     }
 
+    /*
+    private suspend fun fetchJson() : Boolean {
+        println("INNE")
+        var result = false
 
 
 
+        lat = intent.getDoubleExtra("lati", 2000.00)
+        long = intent.getDoubleExtra("longi", 2000.00)
+
+        // val latitude = 59.429317
+        //   val longitude = 10.545646
+
+        val call = apiService.getRSSfeed(lat, long)
+        call.enqueue(object : retrofit2.Callback<RSSObject> {
+            override fun onFailure(call: retrofit2.Call<RSSObject>, t: Throwable) {
+                println("FAILET IGJEN")
+            }
+
+            override fun onResponse(
+                call: retrofit2.Call<RSSObject>,
+                response: retrofit2.Response<RSSObject>
+            ) {
+                if (response.isSuccessful) {
+                    data = response.body()
+                    result = true
+                }
+            }
+        })
+
+        return result
+
+
+
+    }*/
 
     fun buildUrl()  : String {
         val rssLink = "https://api.met.no/weatherapi/metalerts/1.1/"
@@ -178,18 +189,29 @@ class MenuActivity : AppCompatActivity() {
 
             }
         }
-    }*/
+    }
 
     //Bruker feed-adapter til å sette recyclerview
+    private fun setView(result: RSSObject) {
+        val adapter = FeedAdapter(result,baseContext)
+        rssRecyclerview.adapter = adapter
+        adapter.notifyDataSetChanged()
+
+        if (adapter.itemCount == 0) {
+            val ekstrem = findViewById<View>(R.id.ekstremTextView)
+            ekstrem.visibility = View.GONE
+
+        }
+
+    }
 
 
-/*
     //Lager et RSS-objekt ved å hente ut info fra APIet
     suspend fun lagListe(url: String) : RSSObject {
         val response = Fuel.get(url).awaitString()
         return Gson().fromJson<RSSObject>(response, RSSObject::class.java)
 
-    }*/
+    }
 
 }
 
