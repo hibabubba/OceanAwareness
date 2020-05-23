@@ -12,13 +12,12 @@ import com.example.prosjekt.R
 
 class SettingsActivity : AppCompatActivity() {
 
-    private var currentfulltextApp: Boolean = false
+    private var currentFulltextApp: Boolean = false
     private var currentFulltextRedning: Boolean = false
     private lateinit var omAppButton: androidx.appcompat.widget.AppCompatImageButton
     private lateinit var omRedningButton: androidx.appcompat.widget.AppCompatImageButton
     private lateinit var fullTextApp: TextView
     private lateinit var fullTextRedning: TextView
-    private lateinit var arrow: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -34,7 +33,7 @@ class SettingsActivity : AppCompatActivity() {
         omRedningButton = findViewById(R.id.omRedningButton)
         fullTextApp = findViewById(R.id.omAppTextView)
         fullTextRedning = findViewById(R.id.omRedningTextView)
-        arrow = findViewById(R.id.arrow)
+
 
         findViewById<Switch>(R.id.nattSwitch).setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -46,15 +45,15 @@ class SettingsActivity : AppCompatActivity() {
 
         omAppButton.setOnClickListener {
             changeState("app")
-            currentfulltextApp = true
+            println("trykket på appknapp")
         }
 
         omRedningButton.setOnClickListener{
             changeState("redning")
-            currentFulltextRedning = true
+            println("trykket på redningknapp")
         }
 
-        arrow.setOnClickListener {
+        findViewById<ImageButton>(R.id.arrow).setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
@@ -63,16 +62,20 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun changeState(type : String) {
         if (type == "app") {
-            if (!currentfulltextApp) {
+            if (!currentFulltextApp) {
+                println("legger til tekst om app")
                 putTextApp()
             } else {
                 hideText(type)
+                println("fjerner tekst om redning")
             }
         } else {
             if (!currentFulltextRedning) {
+                println("legger til tekst om redning")
                 putTextRedning()
             } else {
                 hideText(type)
+                println("fjerner tekst om redning")
             }
         }
 
@@ -82,20 +85,28 @@ class SettingsActivity : AppCompatActivity() {
         if(type == "app") {
             fullTextApp.text = ""
             omAppButton.setImageResource(R.drawable.ic_drop_down)
+            println("tekst om app fjernet")
+            currentFulltextApp = false
         } else {
             fullTextRedning.text = ""
+            println("tekst om redning fjernet")
             omRedningButton.setImageResource(R.drawable.ic_drop_down)
+            currentFulltextRedning = false
         }
     }
 
     private fun putTextRedning() {
         fullTextRedning.text= getString(R.string.redningstjenesten)
         omRedningButton.setImageResource(R.drawable.ic_drop_up)
+        println("tekst om redning lagt til")
+        currentFulltextRedning = true
     }
 
     private fun putTextApp(){
         fullTextApp.text = getString(R.string.termsOfServiceInnhold)
         omAppButton.setImageResource(R.drawable.ic_drop_up)
+        println("tekst om app lagt til")
+        currentFulltextApp = true
     }
 
 }

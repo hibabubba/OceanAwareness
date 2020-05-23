@@ -61,19 +61,18 @@
     <string name="precipitation">Nedbør\n %1$s %2$s</string>
 
     <!-- SETTINGS AKTIVITET -->
-    <string name="termsOfServiceInnhold">Ocean Awareness er en gratis mobilapplikasjon utviklet av  Emma Bergstein Bergh, Hanan Timraz,  Hiba Benhaida, Joakim Foss Johansen, Sofie Bragnes og Rokas Magnus  som en del av IN2000-prosjektet våren 2020 ved Universitetet i Oslo. Hensikten med denne appen er å gi båtførere i Norge data om værforhold i havet,med hensikt om å forbygge ulykker ute i havet. \ N \ n
+    <string name="termsOfServiceInnhold">Ocean Awareness er en gratis mobilapplikasjon utviklet av Emma Bergstein Bergh, Hanan Timraz,  Hiba Benhaida, Joakim Foss Johansen, Sofie Bragnes og Rokas Magnus. Applikasjonen er utarbeidet som en del av et prosjektarbeid i emnet IN2000 våren 2020 ved Universitetet i Oslo. Appen gir båtførere i Norge informasjon om vær- og havaktivitet, med den hensikt å forbygge ulykker blant båtførere. \n \n
 
-Eventuelle e-postmeldinger som blir sendt til utviklerne, vil bli lagret til henvendelsen er besvart.
+Eventuelle e-postmeldinger som blir sendt til utviklerne vil bli lagret til henvendelsen er besvart.
     </string>
-    <string name="redningstjenesten">Redningsselskapet er en frivillig, humanitær medlemsorganisasjon, som jobber for å gjøre det tryggere å ferdes på og ved sjøen. Og det DU kan gjøre som båtfører er å være best mulig forberedt, for å slippe unødvendige hendelser for deg og dine nære. \ N \ n
-Men skulle det oppstå en ulykke når du er ute til sjøs, ring disse:\ N \ n
-NØDANROP MED TELEFON - HELE DØGNET \ n
-Kystradioen 	120 \ n
-Politiet		112 \N \ n
-NØDANROP MED RADIO - HELE DØGNET \ n
-VHF Kanal 16 \N\ n
-REDNINGSSELSKAPET \ n
-Ved assistanse (Servicetelefonen)		02016  \ n
+    <string name="redningstjenesten">Redningsselskapet er en frivillig, humanitær medlemsorganisasjon som jobber for å gjøre det tryggere å ferdes på og ved sjøen. Det du som båtfører kan bidra med er å være best mulig forberedt, for å forebygge uønskede hendelser for deg og dine nære. \n\n Skulle det oppstå en ulykke når du er ute til sjøs, benytt deg av følgende nødnumre: \n
+NØDANROP MED TELEFON - HELE DØGNET \n
+Kystradioen 	120 \n
+Politiet		112 \n\n
+NØDANROP MED RADIO - HELE DØGNET \n
+VHF Kanal 16 \n\n
+REDNINGSSELSKAPET \n
+Ved assistanse (Servicetelefonen)		02016  \n
 Assistanse i havn (Falck) 			815 70 411
 </string>
 </resources>

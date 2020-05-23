@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
     private var longTextView: TextView? = null
     private var latTextView: TextView? = null
     private lateinit var popupWindow: PopupWindow
-    private lateinit var sjekkBtn: Button
     private var savedLat: Double = 0.toDouble()
     private var savedLong: Double = 0.toDouble()
 
@@ -58,7 +57,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
         setContentView(R.layout.activity_main)
         longTextView = findViewById(R.id.shared_pref_saved_long_textview)
         latTextView = findViewById(R.id.shared_pref_saved_lat_textview)
-        sjekkBtn = findViewById(R.id.button)
+
 
         findViewById<AppCompatImageButton>(R.id.settingsButton).setOnClickListener{
             val intent = Intent(this, SettingsActivity::class.java)
@@ -109,7 +108,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
 
         {
-         sjekkBtn.visibility = View.GONE
+
 
          // Legger til minimum zoom, panning restriksjon og en clicklistener
          mapboxMap.setLatLngBoundsForCameraTarget(RESTRICTED_BOUNDS_AREA)
