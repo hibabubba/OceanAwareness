@@ -7,6 +7,7 @@
     android:orientation="vertical"
     android:background="?attr/backgroundcolor"
     tools:context=".OceanAwareness.Activity.Activity.OceanActivity">
+
     <ProgressBar
         android:id="@+id/progressbar2"
         android:layout_width="match_parent"
