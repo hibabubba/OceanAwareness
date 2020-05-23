@@ -6,7 +6,9 @@
     cardView:cardCornerRadius="8dp"
     cardView:cardElevation="8dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="?attr/buttoncolor"
+    >
 
     <LinearLayout
         android:orientation="vertical"
@@ -24,7 +26,6 @@
 
         <TextView
             android:id="@+id/txtPubdate"
-            android:text="@string/_2020_03_30"
             android:textSize="12sp"
             android:textStyle="italic"
             android:layout_width="match_parent"

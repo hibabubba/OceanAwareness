@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name" >Ocean Awarness </string>
+    <!-- KART FUNKSJON -->
+    <string name="app_name" >Ocean Awareness </string>
     <string name="mapbox_access_token">pk.eyJ1IjoiaGliYWJlIiwiYSI6ImNrOHVkcWQ5eDAxZWIzanFxbHpxZzhxbXcifQ.5LZQ6tZnTbUXugtbSTRG7A</string>
     <string name="skjermbakgrunn">Skjermbakgrunn</string>
     <string name="tilbakeknapp">tilbakeknapp</string>
@@ -9,22 +10,21 @@
     <string name="av">Av</string>
     <string name="p">På</string>
     <string name="innstillinger">Innstillinger</string>
+
+    <!-- MENY AKTIVITET -->
+    <string name="kompass">Kompass</string>
+    <string name="knapp">knapp</string>
+    <string name="sjekk_hav_og_v_r">Sjekk hav og vær</string>
     <string name="havaktivitet">Havaktivitet</string>
     <string name="ekstremv_rvarsel">EKSTREMVÆRVARSEL</string>
     <string name="title">Title</string>
     <string name="content">Content</string>
-    <string name="_2020_03_30">2020-03-30</string>
     <string name="v_rvarsel">Værvarsel</string>
     <string name="b_lgevarsel">Bølgevarsel</string>
     <string name="ekstremv_r">ekstremvær</string>
-    <string name="sky_icon">Skyer</string>
-    <string name="taake_icon">Tåke</string>
-    <string name="fukt_icon">Luftfuktighet</string>
-    <string name="vindretning_icon">Vindretning</string>
-    <string name="vindstyrke_icon">Vindstyrke</string>
-    <string name="regn_icon">Nedbør</string>
-    <string name="kart_knapp">kart knapp</string>
     <string name="havtempratur">havtempratur</string>
+
+    <!-- HAVAKTIVITET -->
     <string name="bolgehoyde_icon">bolgehoyde icon</string>
     <string name="stromretning_icon">stromretning icon</string>
     <string name="icepresence_icon">icepresence icon</string>
@@ -33,7 +33,47 @@
     <string name="klokkeslett">Klokkeslett</string>
     <string name="koordinater">Koordinater:</string>
     <string name="dato">Dato:</string>
-    <string name="kompass">Kompass</string>
-    <string name="knapp">knapp</string>
-    <string name="sjekk_hav_og_v_r">Sjekk hav og vær</string>
+    <string name="kl">%1$s:00</string>
+    <string name="feilmelding"> Kan ikke hente informasjon </string>
+    <string name="icepresence"> Icepresence\n %1$s %2$s</string>
+    <string name="temp"> Havtemperatur\n  %1$s  °C </string>
+    <string name="seacurrentspeed"> Havstrømfart\n %1$s  %2$s </string>
+    <string name="seacurrentdirection"> Havstrømretning\n  %1$s ° </string>
+    <string name="totalwavedirection"> Bølgeretning\n  %1$s ° </string>
+    <string name="waveheight"> Bølgehøyde\n %1$s %2$s</string>
+    <string name="koordinat"> KOORDINATER: \n  Latitude =  %1$s \nLongitude =  %2$s</string>
+
+    <!-- VÆRVARSEL AKTIVITET -->
+    <string name="hoved"> %1$s °C</string>
+    <string name="cloud"> Skyer\n %1$s  %2$s </string>
+    <string name="fog"> Tåke\n %1$s  %2$s </string>
+    <string name="sky_icon">Skyer</string>
+    <string name="taake_icon">Tåke</string>
+    <string name="fukt_icon">Luftfuktighet</string>
+    <string name="vindretning_icon">Vindretning</string>
+    <string name="vindstyrke_icon">Vindstyrke</string>
+    <string name="regn_icon">Nedbør</string>
+    <string name="kart_knapp">kart knapp</string>
+    <string name="humid">Luftfuktighet\n %1$s %2$s </string>
+    <string name="windDir"> Vindretning:  %1$s \n Grader: %2$s</string>
+    <string name="windSpeed"> Vindstyrke\n %1$s m/s</string>
+    <string name="date"> Dato: %1$s</string>
+    <string name="precipitation">Nedbør\n %1$s %2$s</string>
+
+    <!-- SETTINGS AKTIVITET -->
+    <string name="termsOfServiceInnhold">Ocean Awareness er en gratis mobilapplikasjon utviklet av  Emma Bergstein Bergh, Hanan Timraz,  Hiba Benhaida, Joakim Foss Johansen, Sofie Bragnes og Rokas Magnus  som en del av IN2000-prosjektet våren 2020 ved Universitetet i Oslo. Hensikten med denne appen er å gi båtførere i Norge data om værforhold i havet,med hensikt om å forbygge ulykker ute i havet. \ N \ n
+
+Eventuelle e-postmeldinger som blir sendt til utviklerne, vil bli lagret til henvendelsen er besvart.
+    </string>
+    <string name="redningstjenesten">Redningsselskapet er en frivillig, humanitær medlemsorganisasjon, som jobber for å gjøre det tryggere å ferdes på og ved sjøen. Og det DU kan gjøre som båtfører er å være best mulig forberedt, for å slippe unødvendige hendelser for deg og dine nære. \ N \ n
+Men skulle det oppstå en ulykke når du er ute til sjøs, ring disse:\ N \ n
+NØDANROP MED TELEFON - HELE DØGNET \ n
+Kystradioen 	120 \ n
+Politiet		112 \N \ n
+NØDANROP MED RADIO - HELE DØGNET \ n
+VHF Kanal 16 \N\ n
+REDNINGSSELSKAPET \ n
+Ved assistanse (Servicetelefonen)		02016  \ n
+Assistanse i havn (Falck) 			815 70 411
+</string>
 </resources>

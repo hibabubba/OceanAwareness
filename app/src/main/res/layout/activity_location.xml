@@ -4,95 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/backgroundcolor"
     android:orientation="vertical"
-    tools:context=".LocationActivity"
-    android:background="?attr/backgroundcolor">
+    tools:context=".OceanAwareness.Activity.Activity.LocationActivity">
 
-    <!--<ImageView
-        android:id="@+id/Bakgrunn"
+    <ProgressBar
+        android:id="@+id/progressbar2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:contentDescription="@string/skjermbakgrunn"/>
--->
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
 
     <ImageButton
-            android:id="@+id/mapbutton"
-            android:contentDescription="@string/kart_knapp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@null"
-            android:layout_marginBottom="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/info"
-            app:layout_constraintStart_toStartOf="@+id/info"
-            app:layout_constraintTop_toBottomOf="@id/info"
-            app:srcCompat="@drawable/menykart" />
+        android:id="@+id/mapbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="5dp"
+        android:background="@null"
+        android:contentDescription="@string/kart_knapp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/info"
+        app:layout_constraintStart_toStartOf="@+id/info"
+        app:layout_constraintTop_toBottomOf="@id/info"
+        app:srcCompat="@drawable/menykart" />
 
 
     <ImageButton
         android:id="@+id/arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@null"
         android:layout_marginStart="0dp"
         android:layout_marginEnd="10dp"
+        android:background="@null"
         android:contentDescription="@string/tilbakeknapp"
         app:layout_constraintBottom_toTopOf="@id/ramme"
-        app:layout_constraintTop_toTopOf="@id/date"
         app:layout_constraintEnd_toStartOf="@id/date"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/date"
         app:srcCompat="@drawable/arrow" />
 
     <TextView
         android:id="@+id/date"
-        android:textColor="?attr/textcolor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:textSize="@android:dimen/app_icon_size"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/barlowsemibold"
         android:text="@string/dato"
+        android:textColor="?attr/textcolor"
+        android:textSize="@android:dimen/app_icon_size"
         app:autoSizeMaxTextSize="60sp"
         app:autoSizeMinTextSize="30sp"
         app:autoSizeStepGranularity="3sp"
         app:autoSizeTextType="uniform"
-        android:layout_marginTop="30dp"
+        app:layout_constraintBottom_toTopOf="@id/hovedtext"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/arrow"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/hovedtext" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
         android:id="@+id/hovedtext"
-        android:textColor="?attr/textcolor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="0dp"
         android:layout_alignTop="@+id/arrow"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:textSize="@android:dimen/app_icon_size"
+        android:layout_marginTop="0dp"
         android:fontFamily="@font/barlowsemibold"
+        android:textColor="?attr/textcolor"
+        android:textSize="@android:dimen/app_icon_size"
         app:autoSizeMaxTextSize="60sp"
         app:autoSizeMinTextSize="30sp"
         app:autoSizeStepGranularity="3sp"
         app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@id/ramme"
         app:layout_constraintEnd_toEndOf="@id/date"
         app:layout_constraintStart_toStartOf="@id/date"
-        app:layout_constraintTop_toBottomOf="@id/date"
-        app:layout_constraintBottom_toTopOf="@id/ramme"/>
+        app:layout_constraintTop_toBottomOf="@id/date" />
 
     <FrameLayout
         android:id="@+id/ramme"
         android:layout_width="wrap_content"
         android:layout_height="70dp"
         android:background="?attr/scrollbarcolor"
-        app:layout_constraintTop_toBottomOf="@id/hovedtext"
         app:layout_constraintBottom_toTopOf="@id/info"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/hovedtext">
 
         <HorizontalScrollView
             android:id="@+id/Horisontalscroll"
@@ -100,1297 +102,1296 @@
             android:layout_height="match_parent">
 
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@null"
-                    android:orientation="horizontal"
-                    android:baselineAligned="false">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="70dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id1"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="0dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="70dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id2"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="15dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="70dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id3"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="15dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id4"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="15dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD5"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id5"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="15dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id6"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD7"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id7"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD8"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id8"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD9"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id9"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD10"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id10"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD11"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id11"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD12"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id12"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD13"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id13"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD14"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id14"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD15"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id15"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD16"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id16"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD17"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id17"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD18"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id18"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD19"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id19"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD20"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id20"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD21"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id21"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD22"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id22"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD23"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id23"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD24"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id24"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD25"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id25"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD26"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id26"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD27"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id27"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD28"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id28"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD29"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id29"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD30"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id30"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD31"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id31"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD32"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id32"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD33"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id33"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD34"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id34"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD35"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id35"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD36"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id36"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD37"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id37"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD38"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id38"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD39"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id39"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD40"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id40"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD41"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id41"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD42"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id42"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD43"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id43"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD44"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id44"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD45"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id45"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD46"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id46"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD47"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id47"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/iD48"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="20dp"
-                            android:fontFamily="@font/barlowsemibold"
-                            android:textSize="17sp" />
-
-                        <ImageButton
-                            android:id="@+id/id48"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginStart="10dp"
-                            android:background="@null"
-                            android:contentDescription="@string/knapp" />
-                    </LinearLayout>
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id1"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="0dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
                 </LinearLayout>
-            </HorizontalScrollView>
-        </FrameLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/info"
-            android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="15dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="70dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id3"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="15dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id4"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="15dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id5"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="15dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id6"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id7"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id8"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id9"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id10"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id11"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id12"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD13"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id13"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD14"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id14"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id15"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD16"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id16"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD17"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id17"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id18"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD19"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id19"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD20"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id20"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD21"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id21"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD22"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id22"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id23"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD24"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id24"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id25"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD26"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id26"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD27"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id27"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD28"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id28"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD29"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id29"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD30"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id30"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD31"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id31"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD32"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id32"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD33"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id33"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD34"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id34"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD35"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id35"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD36"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id36"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD37"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id37"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD38"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id38"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD39"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id39"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id40"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD41"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id41"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD42"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id42"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD43"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id43"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD44"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id44"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD45"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id45"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD46"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id46"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD47"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id47"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/iD48"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/barlowsemibold"
+                        android:textSize="17sp" />
+
+                    <ImageButton
+                        android:id="@+id/id48"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:background="@null"
+                        android:contentDescription="@string/knapp" />
+                </LinearLayout>
+            </LinearLayout>
+        </HorizontalScrollView>
+    </FrameLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/mapbutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ramme">
+
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@id/mapbutton"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/sky_icon"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/imageView3"
+            app:layout_constraintEnd_toStartOf="@id/cloud"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ramme">
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/cloud" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/taake_icon"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/imageView4"
+            app:layout_constraintEnd_toEndOf="@id/imageView2"
+            app:layout_constraintStart_toStartOf="@id/imageView2"
+            app:layout_constraintTop_toBottomOf="@id/imageView2"
+            app:srcCompat="@drawable/taake" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/fukt_icon"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/imageView3"
+            app:layout_constraintStart_toStartOf="@id/imageView3"
+            app:layout_constraintTop_toBottomOf="@id/imageView3"
+            app:srcCompat="@drawable/luftfuktighet" />
 
 
+        <TextView
+            android:id="@+id/cloud"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/barlowmedium"
+            android:text="@string/sky_icon"
+            android:textColor="?attr/textcolor"
+            app:autoSizeMaxTextSize="50sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="5sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@id/fog"
+            app:layout_constraintEnd_toStartOf="@id/imageView6"
+            app:layout_constraintStart_toEndOf="@id/imageView2"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/sky_icon"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/cloud"
-                    app:layout_constraintEnd_toStartOf="@id/cloud"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/imageView3"/>
+        <TextView
+            android:id="@+id/fog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/barlowmedium"
+            android:text="@string/taake_icon"
+            android:textColor="?attr/textcolor"
+            app:autoSizeMaxTextSize="50sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="5sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@id/humid"
+            app:layout_constraintEnd_toEndOf="@id/cloud"
+            app:layout_constraintStart_toStartOf="@id/cloud"
+            app:layout_constraintTop_toBottomOf="@id/cloud" />
 
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/taake_icon"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/taake"
-                    app:layout_constraintEnd_toEndOf="@id/imageView2"
-                    app:layout_constraintStart_toStartOf="@id/imageView2"
-                    app:layout_constraintTop_toBottomOf="@id/imageView2"
-                    app:layout_constraintBottom_toTopOf="@id/imageView4"/>
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/fukt_icon"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/luftfuktighet"
-                    app:layout_constraintEnd_toEndOf="@id/imageView3"
-                    app:layout_constraintStart_toStartOf="@id/imageView3"
-                    app:layout_constraintTop_toBottomOf="@id/imageView3"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-                <TextView
-                    android:id="@+id/cloud"
-                    android:textColor="?attr/textcolor"
-                    android:text="@string/sky_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/barlowmedium"
-                    app:autoSizeMaxTextSize="50sp"
-                    app:autoSizeMinTextSize="12sp"
-                    app:autoSizeStepGranularity="5sp"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintBottom_toTopOf="@id/fog"
-                    app:layout_constraintEnd_toStartOf="@id/imageView6"
-                    app:layout_constraintStart_toEndOf="@id/imageView2"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/fog"
-                    android:textColor="?attr/textcolor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/barlowmedium"
-                    android:text="@string/taake_icon"
-                    app:autoSizeMaxTextSize="50sp"
-                    app:autoSizeMinTextSize="12sp"
-                    app:autoSizeStepGranularity="5sp"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintEnd_toEndOf="@id/cloud"
-                    app:layout_constraintStart_toStartOf="@id/cloud"
-                    app:layout_constraintTop_toBottomOf="@id/cloud"
-                    app:layout_constraintBottom_toTopOf="@id/humid"/>
-
-                <TextView
-                    android:id="@+id/humid"
-                    android:textColor="?attr/textcolor"
-                    android:text="@string/fukt_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/barlowmedium"
-                    app:autoSizeMaxTextSize="50sp"
-                    app:autoSizeMinTextSize="12sp"
-                    app:autoSizeStepGranularity="5sp"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintEnd_toStartOf="@id/imageView8"
-                    app:layout_constraintStart_toEndOf="@id/imageView4"
-                    app:layout_constraintTop_toBottomOf="@id/fog"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+        <TextView
+            android:id="@+id/humid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/barlowmedium"
+            android:text="@string/fukt_icon"
+            android:textColor="?attr/textcolor"
+            app:autoSizeMaxTextSize="50sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="5sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imageView8"
+            app:layout_constraintStart_toEndOf="@id/imageView4"
+            app:layout_constraintTop_toBottomOf="@id/fog" />
 
 
-                <ImageView
-                    android:id="@+id/imageView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/vindretning_icon"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/vindretning"
-                    app:layout_constraintEnd_toStartOf="@id/winddirection"
-                    app:layout_constraintStart_toEndOf="@id/cloud"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/imageView7"/>
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/vindretning_icon"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/imageView7"
+            app:layout_constraintEnd_toStartOf="@id/winddirection"
+            app:layout_constraintStart_toEndOf="@id/cloud"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/vindretning" />
 
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="0dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/vindstyrke_icon"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/vindstyrke"
-                    app:layout_constraintEnd_toEndOf="@id/imageView6"
-                    app:layout_constraintStart_toStartOf="@id/imageView6"
-                    app:layout_constraintTop_toBottomOf="@id/imageView6"
-                    app:layout_constraintBottom_toTopOf="@id/imageView8"/>
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/vindstyrke_icon"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toTopOf="@id/imageView8"
+            app:layout_constraintEnd_toEndOf="@id/imageView6"
+            app:layout_constraintStart_toStartOf="@id/imageView6"
+            app:layout_constraintTop_toBottomOf="@id/imageView6"
+            app:srcCompat="@drawable/vindstyrke" />
 
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/regn_icon"
-                    android:scaleType="fitXY"
-                    app:srcCompat="@drawable/regn"
-                    app:layout_constraintEnd_toEndOf="@id/imageView7"
-                    app:layout_constraintStart_toStartOf="@id/imageView7"
-                    app:layout_constraintTop_toBottomOf="@id/imageView7"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-                <TextView
-                    android:id="@+id/winddirection"
-                    android:textColor="?attr/textcolor"
-                    android:text="@string/vindretning_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/barlowmedium"
-                    app:autoSizeMaxTextSize="50sp"
-                    app:autoSizeMinTextSize="12sp"
-                    app:autoSizeStepGranularity="5sp"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imageView6"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/windspeed"/>
-
-                <TextView
-                    android:id="@+id/windspeed"
-                    android:textColor="?attr/textcolor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/barlowmedium"
-                    android:text="@string/vindstyrke_icon"
-                    app:autoSizeMaxTextSize="50sp"
-                    app:autoSizeMinTextSize="12sp"
-                    app:autoSizeStepGranularity="5sp"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/winddirection"
-                    app:layout_constraintTop_toBottomOf="@id/winddirection"
-                    app:layout_constraintBottom_toTopOf="@id/precipitation" />
-
-                <TextView
-                    android:id="@+id/precipitation"
-                    android:textColor="?attr/textcolor"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="0dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:fontFamily="@font/barlowmedium"
-                    android:text="@string/regn_icon"
-                    app:autoSizeMaxTextSize="50sp"
-                    app:autoSizeMinTextSize="12sp"
-                    app:autoSizeStepGranularity="5sp"
-                    app:autoSizeTextType="uniform"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imageView8"
-                    app:layout_constraintTop_toBottomOf="@id/windspeed"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/regn_icon"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/imageView7"
+            app:layout_constraintStart_toStartOf="@id/imageView7"
+            app:layout_constraintTop_toBottomOf="@id/imageView7"
+            app:srcCompat="@drawable/regn" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/winddirection"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/barlowmedium"
+            android:text="@string/vindretning_icon"
+            android:textColor="?attr/textcolor"
+            app:autoSizeMaxTextSize="50sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="5sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@id/windspeed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageView6"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/windspeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/barlowmedium"
+            android:text="@string/vindstyrke_icon"
+            android:textColor="?attr/textcolor"
+            app:autoSizeMaxTextSize="50sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="5sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toTopOf="@id/precipitation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/winddirection"
+            app:layout_constraintTop_toBottomOf="@id/winddirection" />
+
+        <TextView
+            android:id="@+id/precipitation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/barlowmedium"
+            android:text="@string/regn_icon"
+            android:textColor="?attr/textcolor"
+            app:autoSizeMaxTextSize="50sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="5sp"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageView8"
+            app:layout_constraintTop_toBottomOf="@id/windspeed" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

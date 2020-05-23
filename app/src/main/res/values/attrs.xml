@@ -7,9 +7,5 @@
         <attr name="buttoncolor2" format="color"/>
         <attr name="buttontint" format="color"/>
         <attr name="scrollbarcolor" format="color"/>
-
-
-
-
     </declare-styleable>
 </resources>

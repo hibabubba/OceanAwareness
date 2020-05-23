@@ -14,11 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MenuActivity"></activity>
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".OceanActivity" />
-        <activity android:name=".LocationActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.prosjekt.OceanAwareness.Activity.Activity.MenuActivity"></activity>
+        <activity android:name="com.example.prosjekt.OceanAwareness.Activity.Activity.SettingsActivity" />
+        <activity android:name="com.example.prosjekt.OceanAwareness.Activity.Activity.OceanActivity" />
+        <activity android:name="com.example.prosjekt.OceanAwareness.Activity.Activity.LocationActivity" />
+        <activity android:name="com.example.prosjekt.OceanAwareness.Activity.Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

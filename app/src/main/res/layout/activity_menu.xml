@@ -17,8 +17,6 @@
         />
 
 
-
-
     <LinearLayout
         android:background="?attr/buttoncolor"
         android:layout_width="match_parent"

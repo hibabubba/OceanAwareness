@@ -7,7 +7,7 @@
     android:id="@+id/constraint"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".OceanAwareness.Activity.Activity.MainActivity">
 
   <androidx.constraintlayout.widget.Guideline
       android:id="@+id/guideline10"
@@ -30,8 +30,8 @@
       mapbox:layout_constraintStart_toStartOf="parent"
       mapbox:layout_constraintTop_toTopOf="parent">
 
-
   </com.mapbox.mapboxsdk.maps.MapView>
+
 
   <androidx.appcompat.widget.AppCompatImageButton
       android:id="@+id/settingsButton"
@@ -43,23 +43,12 @@
       mapbox:layout_constraintStart_toStartOf="parent"
       mapbox:layout_constraintTop_toTopOf="parent" />
 
-  <!--<ImageView
-      android:id="@+id/imageView"
-      android:layout_width="wrap_content"
-      android:layout_height="150dp"
-      android:padding="5dp"
-      android:background="@drawable/oceanlogo"
-      mapbox:layout_constraintStart_toStartOf="parent"
-      mapbox:layout_constraintTop_toTopOf="parent" />
-      -->
-
 
   <TextView
       android:id="@+id/shared_pref_saved_lat_textview"
       android:textColor="?attr/textcolor"
       android:layout_width="328dp"
       android:layout_height="21dp"
-      android:text="HEI"
       android:layout_marginStart="32dp"
       android:layout_marginTop="24dp"
       mapbox:layout_constraintStart_toStartOf="parent"
