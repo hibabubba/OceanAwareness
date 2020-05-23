@@ -145,42 +145,14 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
 
     }
-    private fun checkData(lat: Double, long: Double){
-
-        val  apiService = Apiproxyservice.create()
-        val call = apiService.getOceanforecast(lat, long)
-
-            call.enqueue(object : retrofit2.Callback<Oceanforecast> {
-                override fun onFailure(call: retrofit2.Call<Oceanforecast>, t: Throwable) {
-                    println("Feil i OceanCall")
-                }
-                override fun onResponse(
-                    call: retrofit2.Call<Oceanforecast>,
-                    response: retrofit2.Response<Oceanforecast>
-                ) {
-                    if (response.isSuccessful) {
-                        val data = response.body()
-                        if(data?.moxForecast?.get(1)?.metnoOceanForecast?.moxSeaTemperature?.content  == null){
-                            Toast.makeText(this@MainActivity, "Vi har ikke informasjon om dette punktet, Trykk ett annet sted", Toast.LENGTH_SHORT).show()
-                        }else{
-                            //vise popupvinduet etter hver click
-                            val layout = findViewById<ConstraintLayout>(R.id.constraint)
-                            ShowPopupWindow(layout, lat, long)
-                        }
-                    }
-                }
-            })
-    }
-
     override fun onMapClick(mapClickPoint: LatLng): Boolean {
         val clickLatitude = mapClickPoint.latitude
         val clickLongitude = mapClickPoint.longitude
 
 
-        //Sjekk om vi har data for disse koordinatene
-        checkData(clickLatitude,clickLongitude)
-
-
+        //vise popupvinduet etter hver click
+        val layout = findViewById<ConstraintLayout>(R.id.constraint)
+        ShowPopupWindow(layout, clickLatitude, clickLongitude)
 
 
         //Hente ut klikken og sette det i texten

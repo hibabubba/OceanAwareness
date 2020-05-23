@@ -3,6 +3,7 @@ package com.example.prosjekt.OceanAwareness.Activity.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.*
 import androidx.lifecycle.LiveData
@@ -46,6 +47,10 @@ class OceanActivity : AppCompatActivity() {
         setContentView(R.layout.activity_ocean)
         latitude = intent.getDoubleExtra("lati", 2000.00)
         longitude  = intent.getDoubleExtra("longi", 2000.00)
+
+        arrow = findViewById(R.id.arrow)
+        mapbutton = findViewById(R.id.mapbutton)
+
         val lat = "%.6f".format(latitude)
         val long = "%.6f".format(longitude)
 
@@ -58,9 +63,17 @@ class OceanActivity : AppCompatActivity() {
         val liveData : LiveData<Oceanforecast> = viewModel.getData()
         liveData.observe(this, Observer { result ->
             data = result
-            createActivity()
-            createScrollView()
-            progressbar2.visibility= View.INVISIBLE
+            if(data?.moxForecast?.get(1)?.metnoOceanForecast?.moxSeaTemperature?.content  == null){
+                val toast = Toast.makeText(this, "Vi har ikke informasjon om dette punktet, Gå tilbake til kartet og trykk ett annet sted", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER,0,0)
+                toast.show()
+                progressbar2.visibility = View.INVISIBLE
+                clickListeners()
+            }else {
+                createActivity()
+                createScrollView()
+                progressbar2.visibility = View.INVISIBLE
+            }
         })
 
         viewModel.setCustomValue(latitude, longitude)
@@ -75,8 +88,6 @@ class OceanActivity : AppCompatActivity() {
      totalWaveDirection = findViewById(R.id.totwavedir)
      waveHeight = findViewById(R.id.waveheight)
      date = findViewById(R.id.date)
-     arrow = findViewById(R.id.arrow)
-     mapbutton = findViewById(R.id.mapbutton)
 
      val tid =  data?.moxForecast?.get(1)?.metnoOceanForecast?.moxValidTime?.gmlTimePeriod?.gmlBegin
      val tiden = tid!!.split("T" ,":")
@@ -105,17 +116,21 @@ class OceanActivity : AppCompatActivity() {
      date.text = dateformatted
 
      //Ta deg tilbake eller til kart
-     arrow.setOnClickListener {
-         val intent = Intent(this, MenuActivity::class.java)
-         intent.putExtra("lati", latitude)
-         intent.putExtra("longi", longitude)
-         startActivity(intent)
-     }
-     mapbutton.setOnClickListener {
-         startActivity(Intent(this, MainActivity::class.java))
-     }
+     clickListeners()
 
  }
+
+    private fun clickListeners(){
+        arrow.setOnClickListener {
+            val intent = Intent(this, MenuActivity::class.java)
+            intent.putExtra("lati", latitude)
+            intent.putExtra("longi", longitude)
+            startActivity(intent)
+        }
+        mapbutton.setOnClickListener {
+            startActivity(Intent(this, MainActivity::class.java))
+        }
+    }
 
 
     private fun createScrollView() {

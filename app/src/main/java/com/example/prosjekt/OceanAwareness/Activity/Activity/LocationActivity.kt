@@ -2,6 +2,7 @@ package com.example.prosjekt.OceanAwareness.Activity.Activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -52,14 +53,26 @@ class LocationActivity : AppCompatActivity() {
         latitude = intent.getDoubleExtra("lati", 2000.00)
         longitude = intent.getDoubleExtra("longi", 2000.00)
 
+        arrow = findViewById(R.id.arrow)
+        mapbutton = findViewById(R.id.mapbutton)
 
         val liveData : LiveData<Locationforecast> = viewModel.getData()
         liveData.observe(this, Observer { result ->
 
             data = result
-            createActivity()
-            createScrollview()
-            progressbar2.visibility= View.INVISIBLE
+            //Sjekke om vi har data for dette punktet
+            if(data?.product?.time?.get(2)?.location?.temperature?.value  == null){
+                val toast = Toast.makeText(this, "Vi har ikke informasjon om dette punktet, Gå tilbake til kartet og trykk ett annet sted", Toast.LENGTH_SHORT)
+                toast.setGravity(Gravity.CENTER,0,0)
+                toast.show()
+                progressbar2.visibility = View.INVISIBLE
+                clickListeners()
+                 }else {
+                createActivity()
+                createScrollview()
+                progressbar2.visibility = View.INVISIBLE
+            }
+
 
         })
         viewModel.setCustomValue(latitude, longitude)
@@ -73,8 +86,6 @@ class LocationActivity : AppCompatActivity() {
         humid = findViewById(R.id.humid)
         windDir = findViewById(R.id.winddirection)
         windSpeed = findViewById(R.id.windspeed)
-        arrow = findViewById(R.id.arrow)
-        mapbutton = findViewById(R.id.mapbutton)
         precipitation = findViewById(R.id.precipitation)
         date = findViewById(R.id.date)
 
@@ -110,6 +121,10 @@ class LocationActivity : AppCompatActivity() {
 
 
         //Lager tilbakeknapper
+        clickListeners()
+
+    }
+    private fun clickListeners(){
         arrow.setOnClickListener {
             val intent = Intent(this, MenuActivity::class.java)
             intent.putExtra("lati", latitude)
@@ -119,7 +134,6 @@ class LocationActivity : AppCompatActivity() {
         mapbutton.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))
         }
-
     }
 
     private fun createScrollview() {
