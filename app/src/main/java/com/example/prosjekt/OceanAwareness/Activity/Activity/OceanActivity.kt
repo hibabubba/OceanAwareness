@@ -175,7 +175,7 @@ class OceanActivity : AppCompatActivity() {
         val tiden = tid!!.split("T", ":")
         info =
             ShowOceanInfo(
-                icepresence = "Icepresence \n       " + data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxSeaIcePresence?.content + data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxSeaIcePresence?.uom,
+                icepresence = "Ismengde \n       " + data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxSeaIcePresence?.content + data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxSeaIcePresence?.uom,
                 totwavedir = " Bølgeretning \n       " + data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxMeanTotalWaveDirection?.content + "°",
                 seacurrentdir = " havstrømretning \n       " + data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxSeaCurrentDirection?.content + "°",
                 waveheight = " Bølgehøyde \n       " + data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxSignificantTotalWaveHeight?.content + data?.moxForecast?.get(nr)?.metnoOceanForecast?.moxSignificantTotalWaveHeight?.uom,

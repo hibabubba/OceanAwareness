@@ -152,7 +152,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
 
         //vise popupvinduet etter hver click
         val layout = findViewById<ConstraintLayout>(R.id.constraint)
-        ShowPopupWindow(layout, clickLatitude, clickLongitude)
+        showPopupWindow(layout, clickLatitude, clickLongitude)
 
 
         //Hente ut klikken og sette det i texten
@@ -215,7 +215,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback,MapboxMap.OnMapClic
     }
 
     //PopuVinduet
-    private fun ShowPopupWindow (view: View,lat: Double,long: Double) {
+    private fun showPopupWindow (view: View,lat: Double,long: Double) {
         // inflate the layout of the popup window
         val inflater: LayoutInflater = LayoutInflater.from(this)
         getSystemService(LAYOUT_INFLATER_SERVICE)
