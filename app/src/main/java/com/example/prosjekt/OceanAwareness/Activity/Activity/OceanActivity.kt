@@ -92,7 +92,7 @@ class OceanActivity : AppCompatActivity() {
      val tid =  data?.moxForecast?.get(1)?.metnoOceanForecast?.moxValidTime?.gmlTimePeriod?.gmlBegin
      val tiden = tid!!.split("T" ,":")
 
-     val icepresencestring = getString(R.string.icepresence)
+     val icepresencestring = getString(R.string.ismengde)
      val icepresenceformatted = format(icepresencestring, data?.moxForecast?.get(1)?.metnoOceanForecast?.moxSeaIcePresence?.content, data?.moxForecast?.get(1)?.metnoOceanForecast?.moxSeaIcePresence?.uom)
      val totalwavedirectionstring = getString(R.string.totalwavedirection)
      val totalwavedirectionformatted = format(totalwavedirectionstring, data?.moxForecast?.get(1)?.metnoOceanForecast?.moxMeanTotalWaveDirection?.content)

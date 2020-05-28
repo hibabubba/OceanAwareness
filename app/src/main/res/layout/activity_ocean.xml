@@ -972,7 +972,7 @@
                 app:layout_constraintStart_toEndOf="@id/seatemp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/imageView11"
-                android:contentDescription="@string/icepresence_icon"
+                android:contentDescription="@string/ismengde_icon"
                 app:srcCompat="@drawable/icepresence" />
 
             <ImageView
@@ -1023,7 +1023,7 @@
                 app:layout_constraintStart_toEndOf="@id/imageView10"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/seacurrentspeed"
-                android:text="@string/icepresence_icon" />
+                android:text="@string/ismengde_icon" />
 
             <TextView
                 android:id="@+id/seacurrentspeed"

@@ -27,6 +27,7 @@ class RSSRepository {
         url.append(longString)
 
         return url.toString()
+
     }
 
 
@@ -36,6 +37,7 @@ class RSSRepository {
         try {
             val response = Fuel.get(buildLink(lat, long)).awaitString()
             val result = Gson().fromJson(response, RSSObject::class.java)
+            println(result)
 
             withContext(Dispatchers.Main) {
                 liveDataRSS.value = result
